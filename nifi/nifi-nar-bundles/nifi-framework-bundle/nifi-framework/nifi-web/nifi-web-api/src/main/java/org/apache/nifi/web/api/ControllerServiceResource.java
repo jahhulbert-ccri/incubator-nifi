@@ -16,6 +16,7 @@
  */
 package org.apache.nifi.web.api;
 
+import com.wordnik.swagger.annotations.Api;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -74,6 +75,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for managing a Controller Service.
  */
+@Api(hidden = true)
 public class ControllerServiceResource extends ApplicationResource {
 
     private static final Logger logger = LoggerFactory.getLogger(ControllerServiceResource.class);

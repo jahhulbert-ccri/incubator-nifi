@@ -16,6 +16,7 @@
  */
 package org.apache.nifi.web.api;
 
+import com.wordnik.swagger.annotations.Api;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -50,6 +51,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for managing this Controller's user groups.
  */
+@Api(hidden = true)
 public class UserGroupResource extends ApplicationResource {
 
     /*

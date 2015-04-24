@@ -17,6 +17,11 @@
 package org.apache.nifi.web.api;
 
 import com.sun.jersey.api.core.ResourceContext;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
+import com.wordnik.swagger.annotations.Authorization;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -68,6 +73,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for managing a Group.
  */
+@Api(hidden = true)
 public class ProcessGroupResource extends ApplicationResource {
 
     private static final String VERBOSE = "false";
@@ -87,6 +93,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return the processor resource within the specified group
      */
     @Path("processors")
+    @ApiOperation(
+            value = "Gets the processor resource",
+            response = ProcessorResource.class
+    )
     public ProcessorResource getProcessorResource() {
         ProcessorResource processorResource = resourceContext.getResource(ProcessorResource.class);
         processorResource.setGroupId(groupId);
@@ -99,6 +109,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return the connection sub-resource within the specified group
      */
     @Path("connections")
+    @ApiOperation(
+            value = "Gets the connection resource",
+            response = ConnectionResource.class
+    )
     public ConnectionResource getConnectionResource() {
         ConnectionResource connectionResource = resourceContext.getResource(ConnectionResource.class);
         connectionResource.setGroupId(groupId);
@@ -111,6 +125,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return the input ports sub-resource within the specified group
      */
     @Path("input-ports")
+    @ApiOperation(
+            value = "Gets the input port resource",
+            response = InputPortResource.class
+    )
     public InputPortResource getInputPortResource() {
         InputPortResource inputPortResource = resourceContext.getResource(InputPortResource.class);
         inputPortResource.setGroupId(groupId);
@@ -123,6 +141,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return the output ports sub-resource within the specified group
      */
     @Path("output-ports")
+    @ApiOperation(
+            value = "Gets the output port resource",
+            response = OutputPortResource.class
+    )
     public OutputPortResource getOutputPortResource() {
         OutputPortResource outputPortResource = resourceContext.getResource(OutputPortResource.class);
         outputPortResource.setGroupId(groupId);
@@ -135,6 +157,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return the label sub-resource within the specified group
      */
     @Path("labels")
+    @ApiOperation(
+            value = "Gets the label resource",
+            response = LabelResource.class
+    )
     public LabelResource getLabelResource() {
         LabelResource labelResource = resourceContext.getResource(LabelResource.class);
         labelResource.setGroupId(groupId);
@@ -147,6 +173,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return the funnel sub-resource within the specified group
      */
     @Path("funnels")
+    @ApiOperation(
+            value = "Gets the funnel resource",
+            response = FunnelResource.class
+    )
     public FunnelResource getFunnelResource() {
         FunnelResource funnelResource = resourceContext.getResource(FunnelResource.class);
         funnelResource.setGroupId(groupId);
@@ -159,6 +189,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return the remote process group sub-resource within the specified group
      */
     @Path("remote-process-groups")
+    @ApiOperation(
+            value = "Gets the remote process group resource",
+            response = RemoteProcessGroupResource.class
+    )
     public RemoteProcessGroupResource getRemoteProcessGroupResource() {
         RemoteProcessGroupResource remoteProcessGroupResource = resourceContext.getResource(RemoteProcessGroupResource.class);
         remoteProcessGroupResource.setGroupId(groupId);
@@ -242,9 +276,29 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processGroupEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @TypeHint(ProcessGroupEntity.class)
+    @ApiOperation(
+            value = "Gets the specified process group",
+            response = ProcessGroupEntity.class,
+            authorizations = {
+                @Authorization(value = "Read Only", type = "ROLE_MONITOR"),
+                @Authorization(value = "Data Flow Manager", type = "ROLE_DFM"),
+                @Authorization(value = "Administrator", type = "ROLE_ADMIN")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 400, message = "NiFi was unable to complete the request because it was invalid. The request should not be retried without modification."),
+                @ApiResponse(code = 401, message = "Client could not be authenticated."),
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request."),
+                @ApiResponse(code = 404, message = "The specified resource could not be found."),
+                @ApiResponse(code = 409, message = "The request was valid but NiFi was not in the appropriate state to process it. Retrying the same request later may be successful.")
+            }
+    )
     public Response getProcessGroup(
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @QueryParam("recursive") @DefaultValue(RECURSIVE) Boolean recursive,
@@ -297,6 +351,22 @@ public class ProcessGroupResource extends ApplicationResource {
     @Path("/snippet-instance")
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(FlowSnippetEntity.class)
+    @ApiOperation(
+            value = "Creates a new flow snippet",
+            response = FlowSnippetEntity.class,
+            authorizations = {
+                @Authorization(value = "ROLE_DFM", type = "ROLE_DFM")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 400, message = "NiFi was unable to complete the request because it was invalid. The request should not be retried without modification."),
+                @ApiResponse(code = 401, message = "Client could not be authenticated."),
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request."),
+                @ApiResponse(code = 404, message = "The specified resource could not be found."),
+                @ApiResponse(code = 409, message = "The request was valid but NiFi was not in the appropriate state to process it. Retrying the same request later may be successful.")
+            }
+    )
     public Response copySnippet(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -441,6 +511,7 @@ public class ProcessGroupResource extends ApplicationResource {
     @PUT
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(ProcessGroupEntity.class)
     public Response updateProcessGroup(
@@ -481,6 +552,7 @@ public class ProcessGroupResource extends ApplicationResource {
     @PUT
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(ProcessGroupEntity.class)
     public Response updateProcessGroup(
@@ -549,6 +621,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processGroupEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
@@ -597,6 +670,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A controllerEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
@@ -904,6 +978,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processGroupEntity.
      */
     @DELETE
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
@@ -956,6 +1031,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processGroupStatusEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN', 'ROLE_NIFI')")
@@ -999,6 +1075,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processorEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")

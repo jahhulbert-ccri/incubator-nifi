@@ -16,6 +16,7 @@
  */
 package org.apache.nifi.web.api;
 
+import com.wordnik.swagger.annotations.Api;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -62,6 +63,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for managing this Controller's users.
  */
+@Api(hidden = true)
 public class UserResource extends ApplicationResource {
 
     /*

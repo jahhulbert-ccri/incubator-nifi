@@ -16,6 +16,7 @@
  */
 package org.apache.nifi.web.api;
 
+import com.wordnik.swagger.annotations.Api;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -85,6 +86,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for querying data provenance.
  */
+@Api(hidden = true)
 public class ProvenanceResource extends ApplicationResource {
 
     private static final Logger logger = LoggerFactory.getLogger(ProvenanceResource.class);
