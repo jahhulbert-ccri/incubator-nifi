@@ -16,6 +16,7 @@
  */
 package org.apache.nifi.web.api;
 
+import com.wordnik.swagger.annotations.Api;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -44,6 +45,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for querying the history of this Controller.
  */
+@Api(hidden = true)
 public class HistoryResource extends ApplicationResource {
 
     private NiFiServiceFacade serviceFacade;

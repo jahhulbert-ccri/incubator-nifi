@@ -17,6 +17,7 @@
 package org.apache.nifi.web.api;
 
 import com.sun.jersey.multipart.FormDataParam;
+import com.wordnik.swagger.annotations.Api;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.Date;
@@ -61,6 +62,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for managing a Template.
  */
+@Api(hidden = true)
 public class TemplateResource extends ApplicationResource {
 
     private static final Logger logger = LoggerFactory.getLogger(TemplateResource.class);

@@ -16,6 +16,7 @@
  */
 package org.apache.nifi.web.api;
 
+import com.wordnik.swagger.annotations.Api;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -40,6 +41,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
  * RESTful endpoint for retrieving system diagnostics.
  */
 @Path("/system-diagnostics")
+@Api(
+        value = "/system-diagnostics",
+        description = "Provides diagnostics for the system NiFi is running on"
+)
 public class SystemDiagnosticsResource extends ApplicationResource {
 
     private static final Logger logger = LoggerFactory.getLogger(SystemDiagnosticsResource.class);

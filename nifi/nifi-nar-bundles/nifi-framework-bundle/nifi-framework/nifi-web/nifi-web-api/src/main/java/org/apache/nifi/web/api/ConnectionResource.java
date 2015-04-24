@@ -16,6 +16,11 @@
  */
 package org.apache.nifi.web.api;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
+import com.wordnik.swagger.annotations.Authorization;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -73,6 +78,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for managing a Connection.
  */
+@Api(hidden = true)
 public class ConnectionResource extends ApplicationResource {
 
     private static final Logger logger = LoggerFactory.getLogger(ConnectionResource.class);
@@ -156,6 +162,20 @@ public class ConnectionResource extends ApplicationResource {
     @Path("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @TypeHint(ConnectionEntity.class)
+    @ApiOperation(
+            value = "Gets the specified connection",
+            response = ConnectionEntity.class,
+            authorizations = {
+                @Authorization(value = "ROLE_MONITOR", type = "ROLE_MONITOR"),
+                @Authorization(value = "ROLE_DFM", type = "ROLE_DFM"),
+                @Authorization(value = "ROLE_ADMIN", type = "ROLE_ADMIN")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request")
+            }
+    )
     public Response getConnection(@QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @PathParam("id") String id) {
 

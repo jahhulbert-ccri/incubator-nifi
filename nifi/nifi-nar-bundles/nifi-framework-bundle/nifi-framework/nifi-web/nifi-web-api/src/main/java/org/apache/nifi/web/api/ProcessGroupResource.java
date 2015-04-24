@@ -17,6 +17,11 @@
 package org.apache.nifi.web.api;
 
 import com.sun.jersey.api.core.ResourceContext;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
+import com.wordnik.swagger.annotations.Authorization;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -68,6 +73,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for managing a Group.
  */
+//@Path("") // necessary due to bug in swagger
+@Api(hidden = true)
 public class ProcessGroupResource extends ApplicationResource {
 
     private static final String VERBOSE = "false";
@@ -87,6 +94,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return
      */
     @Path("processors")
+    @ApiOperation(
+            value = "Gets the processor resource",
+            response = ProcessorResource.class
+    )
     public ProcessorResource getProcessorResource() {
         ProcessorResource processorResource = resourceContext.getResource(ProcessorResource.class);
         processorResource.setGroupId(groupId);
@@ -99,6 +110,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return
      */
     @Path("connections")
+    @ApiOperation(
+            value = "Gets the connection resource",
+            response = ConnectionResource.class
+    )
     public ConnectionResource getConnectionResource() {
         ConnectionResource connectionResource = resourceContext.getResource(ConnectionResource.class);
         connectionResource.setGroupId(groupId);
@@ -111,6 +126,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return
      */
     @Path("input-ports")
+    @ApiOperation(
+            value = "Gets the input port resource",
+            response = InputPortResource.class
+    )
     public InputPortResource getInputPortResource() {
         InputPortResource inputPortResource = resourceContext.getResource(InputPortResource.class);
         inputPortResource.setGroupId(groupId);
@@ -123,6 +142,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return
      */
     @Path("output-ports")
+    @ApiOperation(
+            value = "Gets the output port resource",
+            response = OutputPortResource.class
+    )
     public OutputPortResource getOutputPortResource() {
         OutputPortResource outputPortResource = resourceContext.getResource(OutputPortResource.class);
         outputPortResource.setGroupId(groupId);
@@ -135,6 +158,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return
      */
     @Path("labels")
+    @ApiOperation(
+            value = "Gets the label resource",
+            response = LabelResource.class
+    )
     public LabelResource getLabelResource() {
         LabelResource labelResource = resourceContext.getResource(LabelResource.class);
         labelResource.setGroupId(groupId);
@@ -147,6 +174,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return
      */
     @Path("funnels")
+    @ApiOperation(
+            value = "Gets the funnel resource",
+            response = FunnelResource.class
+    )
     public FunnelResource getFunnelResource() {
         FunnelResource funnelResource = resourceContext.getResource(FunnelResource.class);
         funnelResource.setGroupId(groupId);
@@ -159,6 +190,10 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return
      */
     @Path("remote-process-groups")
+    @ApiOperation(
+            value = "Gets the remote process group resource",
+            response = RemoteProcessGroupResource.class
+    )
     public RemoteProcessGroupResource getRemoteProcessGroupResource() {
         RemoteProcessGroupResource remoteProcessGroupResource = resourceContext.getResource(RemoteProcessGroupResource.class);
         remoteProcessGroupResource.setGroupId(groupId);
@@ -262,6 +297,20 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @TypeHint(ProcessGroupEntity.class)
+    @ApiOperation(
+            value = "Gets the specified process group",
+            response = ProcessGroupEntity.class,
+            authorizations = {
+                @Authorization(value = "ROLE_MONITOR", type = "ROLE_MONITOR"),
+                @Authorization(value = "ROLE_DFM", type = "ROLE_DFM"),
+                @Authorization(value = "ROLE_ADMIN", type = "ROLE_ADMIN")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request")
+            }
+    )
     public Response getProcessGroup(
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @QueryParam("recursive") @DefaultValue(RECURSIVE) Boolean recursive,

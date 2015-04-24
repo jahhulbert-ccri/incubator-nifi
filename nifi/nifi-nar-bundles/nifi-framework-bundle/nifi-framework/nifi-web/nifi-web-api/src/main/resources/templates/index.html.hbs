@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+        http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html>
+    <head>
+        <title>{{info.title}}-{{info.version}}</title>
+        <script type="text/javascript" src="../nifi/js/jquery/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            if (typeof window.jQuery === 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript" %3E%3C/script%3E'));
+            }
+        </script>
+        <style>
+            @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400";
+
+            html, html a {
+                -webkit-font-smoothing: antialiased;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+            }
+
+            body {
+                width: 62.5em;
+                margin: 0 auto;
+                display: block;
+                font-family: "Open Sans", "DejaVu Sans", sans-serif;
+            }
+            
+            div.endpoint {
+                margin-bottom: 10px;
+            }
+
+            /* get */
+            
+            div.endpoint.get {
+                border: 1px solid #174961;
+            }
+            
+            div.get div.operation-handle {
+                background-color: rgba(23, 73, 97, .15);
+            }
+            
+            div.get div.method {
+                background-color: #174961;
+            }
+            
+            div.get div.operation {
+                border-top: 1px solid #174961;
+            }
+            
+            /* post */
+            
+            div.endpoint.post {
+                border: 1px solid #7298AC;
+            }
+            
+            div.post div.operation-handle {
+                background-color: rgba(114, 152, 172, .15);
+            }
+            
+            div.post div.method {
+                background-color: #7298AC;
+            }
+            
+            div.post div.operation {
+                border-top: 1px solid #7298AC;
+            }
+            
+            /* put */
+            
+            div.endpoint.put {
+                border: 1px solid #063046;
+            }
+            
+            div.put div.operation-handle {
+                background-color: rgba(6, 48, 70, .15);
+            }
+            
+            div.put div.method {
+                background-color: #063046;
+            }
+            
+            div.put div.operation {
+                border-top: 1px solid #063046;
+            }
+            
+            /* delete */
+            
+            div.endpoint.delete {
+                border: 1px solid #47758E;
+            }
+            
+            div.delete div.operation-handle {
+                background-color: rgba(71, 117, 142, .15);
+            }
+            
+            div.delete div.method {
+                background-color: #47758E;
+            }
+            
+            div.delete div.operation {
+                border-top: 1px solid #47758E;
+            }
+            
+            div.operation-handle {
+                cursor: pointer;
+                padding-right: 5px;
+                height: 22px;
+            }
+            
+            div.method {
+                float: left;
+                width: 75px;
+                color: #fff;
+                text-align: center;
+                background-color: #7098ad;
+                margin-right: 10px;
+                font-weight: bold;
+            }
+
+            div.path {
+                float: left;
+                line-height: 22px;
+                font-family: monospace;
+            }
+
+            div.summary {
+                float: right;
+                font-size: 12px;
+                line-height: 22px;
+            }
+
+            div.operation {
+                padding: 5px;
+            }
+
+            div.clear {
+                clear: both;
+            }
+
+            .hidden {
+                display: none;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('div.operation-handle').on('click', function () {
+                    $(this).next('div.operation').toggle();
+                });
+            });
+        </script>
+    </head>
+    <body>
+
+        {{#each paths}}
+            {{> endpoint}}
+        {{/each}}
+    </body>
+</html>

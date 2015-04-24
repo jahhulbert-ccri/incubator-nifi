@@ -69,6 +69,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.sun.jersey.api.core.ResourceContext;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import org.apache.nifi.web.api.dto.status.ClusterProcessGroupStatusDTO;
 import org.apache.nifi.web.api.entity.ClusterProcessGroupStatusEntity;
 import org.codehaus.enunciate.jaxrs.TypeHint;
@@ -77,6 +79,10 @@ import org.codehaus.enunciate.jaxrs.TypeHint;
  * RESTful endpoint for managing a cluster.
  */
 @Path("/cluster")
+@Api(
+        value = "/cluster",
+        description = "Provides access to the cluster of Nodes that comprise this NiFi"
+)
 public class ClusterResource extends ApplicationResource {
 
     @Context
@@ -90,6 +96,10 @@ public class ClusterResource extends ApplicationResource {
      * @return
      */
     @Path("/nodes")
+    @ApiOperation(
+            value = "Gets the node resource",
+            response = NodeResource.class
+    )
     public NodeResource getNodeResource() {
         return resourceContext.getResource(NodeResource.class);
     }
