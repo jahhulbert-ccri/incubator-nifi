@@ -73,7 +73,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 /**
  * RESTful endpoint for managing a Group.
  */
-//@Path("") // necessary due to bug in swagger
 @Api(hidden = true)
 public class ProcessGroupResource extends ApplicationResource {
 
@@ -294,21 +293,27 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processGroupEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @TypeHint(ProcessGroupEntity.class)
     @ApiOperation(
             value = "Gets the specified process group",
             response = ProcessGroupEntity.class,
             authorizations = {
-                @Authorization(value = "ROLE_MONITOR", type = "ROLE_MONITOR"),
-                @Authorization(value = "ROLE_DFM", type = "ROLE_DFM"),
-                @Authorization(value = "ROLE_ADMIN", type = "ROLE_ADMIN")
+                @Authorization(value = "Read Only", type = "ROLE_MONITOR"),
+                @Authorization(value = "Data Flow Manager", type = "ROLE_DFM"),
+                @Authorization(value = "Administrator", type = "ROLE_ADMIN")
             }
     )
     @ApiResponses(
             value = {
-                @ApiResponse(code = 403, message = "Client is not authorized to make this request")
+                @ApiResponse(code = 400, message = "NiFi was unable to complete the request because it was invalid. The request should not be retried without modification."),
+                @ApiResponse(code = 401, message = "Client could not be authenticated."),
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request."),
+                @ApiResponse(code = 404, message = "The specified resource could not be found."),
+                @ApiResponse(code = 409, message = "The request was valid but NiFi was not in the appropriate state to process it. Retrying the same request later may be successful.")
             }
     )
     public Response getProcessGroup(
@@ -366,6 +371,22 @@ public class ProcessGroupResource extends ApplicationResource {
     @Path("/snippet-instance")
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(FlowSnippetEntity.class)
+    @ApiOperation(
+            value = "Creates a new flow snippet",
+            response = FlowSnippetEntity.class,
+            authorizations = {
+                @Authorization(value = "ROLE_DFM", type = "ROLE_DFM")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 400, message = "NiFi was unable to complete the request because it was invalid. The request should not be retried without modification."),
+                @ApiResponse(code = 401, message = "Client could not be authenticated."),
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request."),
+                @ApiResponse(code = 404, message = "The specified resource could not be found."),
+                @ApiResponse(code = 409, message = "The request was valid but NiFi was not in the appropriate state to process it. Retrying the same request later may be successful.")
+            }
+    )
     public Response copySnippet(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -519,6 +540,7 @@ public class ProcessGroupResource extends ApplicationResource {
     @PUT
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(ProcessGroupEntity.class)
     public Response updateProcessGroup(
@@ -561,6 +583,7 @@ public class ProcessGroupResource extends ApplicationResource {
     @PUT
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(ProcessGroupEntity.class)
     public Response updateProcessGroup(
@@ -635,6 +658,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processGroupEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
@@ -687,6 +711,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A controllerEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
@@ -1004,6 +1029,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processGroupEntity.
      */
     @DELETE
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
@@ -1060,6 +1086,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processGroupStatusEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN', 'ROLE_NIFI')")
@@ -1105,6 +1132,7 @@ public class ProcessGroupResource extends ApplicationResource {
      * @return A processorEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")

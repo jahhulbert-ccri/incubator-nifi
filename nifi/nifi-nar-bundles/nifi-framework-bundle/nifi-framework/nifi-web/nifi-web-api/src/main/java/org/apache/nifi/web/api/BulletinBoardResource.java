@@ -17,6 +17,7 @@
 package org.apache.nifi.web.api;
 
 import com.wordnik.swagger.annotations.Api;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -65,6 +66,7 @@ public class BulletinBoardResource extends ApplicationResource {
      * @return A bulletinBoardEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @TypeHint(BulletinBoardEntity.class)

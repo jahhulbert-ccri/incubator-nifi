@@ -13,81 +13,100 @@
     limitations under the License.
 --}}
 <div class="operation hidden">
-    {{description}}
+    {{#if description}}
+    <div class="description">
+        {{description}}
+    </div>
+    {{/if}}
+    <div class="title">Request</div>
+    <div class="mediatypes details">
+        {{#if consumes}}
+        <div class="mediatype"><div class="title">consumes:</div><div class="mono">{{join consumes ", "}}</div><div class="clear"></div></div>
+        {{/if}}
+    </div>
+    {{#if parameters}}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Required</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+    {{/if}}
+    {{#each parameters}}
+        <tr>
+            <td>{{#ifeq in "body"}}{{else}}{{name}}{{/ifeq}}</td>
+            <td>{{in}}</td>
+            <td>
+                {{#ifeq in "body"}}
+                    yes
+                {{else}}
+                    {{#if required}}yes{{else}}no{{/if}}
+                {{/ifeq}}
+            </td>
+            {{#ifeq in "body"}}
+                <td>
+                {{#ifeq schema.type "array"}}Array[<a class="type-link" href="javascript:void(0);">{{basename schema.items.$ref}}</a>]{{/ifeq}}
+                {{#schema.$ref}}<a class="type-link" href="javascript:void(0);">{{basename schema.$ref}}</a> {{/schema.$ref}}
+                </td>
+            {{else}}
+                {{#ifeq type "array"}}
+                        <td>Array[{{items.type}}] ({{collectionFormat}})</td>
+                {{else}}
+                    {{#ifeq type "ref"}}
+                        <td>string</td>
+                    {{else}}
+                        <td>{{type}} {{#format}}({{format}}){{/format}}</td>
+                    {{/ifeq}}
+                {{/ifeq}}
+            {{/ifeq}}
+            <td>{{description}}</td>
+        </tr>
+    {{/each}}
+    {{#if parameters}}
+        </tbody>
+    </table>
+    {{/if}}
+    <div class="title">Response</div>
+    <div class="mediatypes details">
+        {{#if produces}}
+        <div class="mediatype"><div class="title">produces:</div><div class="mono">{{join produces ", "}}</div><div class="clear"></div></div>
+        {{/if}}
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Status Code</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each responses}}
+            <tr>
+                <td>{{@key}}</td>
+                <td>
+                    {{#if schema}}
+                        {{#schema.$ref}}<a class="type-link" href="javascript:void(0);">{{basename schema.$ref}}</a>{{/schema.$ref}}
+                    {{else}}
+                        string
+                    {{/if}}
+                </td>
+                <td>{{description}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <div class="title">Authorization</div>
+    <div class="authorization details">
+        {{#security}}
+            {{#each this}}
+            <div>{{@key}}</div>
+            {{/each}}
+        {{/security}}
+    </div>
 </div>
-
-{{!--
-{{#deprecated}}-deprecated-{{/deprecated}}
-{{summary}}
-
-{{description}}
-
-{{#if externalDocs.url}}{{externalDocs.description}}. [See external documents for more details]({{externalDocs.url}})
-{{/if}}
-
-{{#if security}}
-#### Security
-{{/if}}
-
-{{#security}}
-{{#each this}}
-* {{@key}}
-{{#this}}   * {{this}}
-{{/this}}
-{{/each}}
-{{/security}}
-
-#### Request
-
-{{#if consumes}}
-**Content-Type: ** {{join consumes ", "}}{{/if}}
-
-##### Parameters
-{{#if parameters}}
-<table border="1">
-    <tr>
-        <th>Name</th>
-        <th>Located in</th>
-        <th>Required</th>
-        <th>Description</th>
-        <th>Default</th>
-        <th>Schema</th>
-    </tr>
-{{/if}}
-
-{{#parameters}}
-<tr>
-    <th>{{name}}</th>
-    <td>{{in}}</td>
-    <td>{{#if required}}yes{{else}}no{{/if}}</td>
-    <td>{{description}}</td>
-    <td> - </td>
-{{#ifeq in "body"}}
-    <td>
-    {{#ifeq schema.type "array"}}Array[<a href="#/definitions/{{basename schema.items.$ref}}">{{basename schema.items.$ref}}</a>]{{/ifeq}}
-    {{#schema.$ref}}<a href="{{schema.$ref}}">{{basename schema.$ref}}</a> {{/schema.$ref}}
-    </td>
-{{else}}
-    {{#ifeq type "array"}}
-            <td>Array[{{items.type}}] ({{collectionFormat}})</td>
-    {{else}}
-            <td>{{type}} {{#format}}({{format}}){{/format}}</td>
-    {{/ifeq}}
-{{/ifeq}}
-</tr>
-{{/parameters}}
-{{#if parameters}}
-</table>
-{{/if}}
-
-
-#### Response
-
-{{#if produces}}**Content-Type: ** {{join produces ", "}}{{/if}}
-
-
-| Status Code | Reason      | Response Model |
-|-------------|-------------|----------------|
-{{#each responses}}| {{@key}}    | {{description}} | {{#schema.$ref}}<a href="{{schema.$ref}}">{{basename schema.$ref}}</a>{{/schema.$ref}}{{#ifeq schema.type "array"}}Array[<a href="{{schema.items.$ref}}">{{basename schema.items.$ref}}</a>]{{/ifeq}}{{^schema}} - {{/schema}}|
-{{/each}}
---}}

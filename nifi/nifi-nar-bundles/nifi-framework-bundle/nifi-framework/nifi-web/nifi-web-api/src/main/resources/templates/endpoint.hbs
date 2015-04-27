@@ -13,11 +13,12 @@
     limitations under the License.
 --}}
 <div class="endpoints">
+    <span class="path hidden">{{@key}}</span>
     {{#post}}
         <div class="endpoint post">
             <div class="operation-handle">
                 <div class="method">POST</div>
-                <div class="path">{{@key}}</div>
+                <div class="path mono"></div>
                 <div class="summary">{{summary}}</div>
                 <div class="clear"></div>
             </div>
@@ -28,7 +29,7 @@
         <div class="endpoint get">
             <div class="operation-handle">
                 <div class="method">GET</div>
-                <div class="path">{{@key}}</div>
+                <div class="path mono"></div>
                 <div class="summary">{{summary}}</div>
                 <div class="clear"></div>
             </div>
@@ -39,7 +40,7 @@
         <div class="endpoint put">
             <div class="operation-handle">
                 <div class="method">PUT</div>
-                <div class="path">{{@key}}</div>
+                <div class="path mono"></div>
                 <div class="summary">{{summary}}</div>
                 <div class="clear"></div>
             </div>
@@ -50,7 +51,7 @@
         <div class="endpoint delete">
             <div class="operation-handle">
                 <div class="method">DELETE</div>
-                <div class="path">{{@key}}</div>
+                <div class="path mono"></div>
                 <div class="summary">{{summary}}</div>
                 <div class="clear"></div>
             </div>
