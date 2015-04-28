@@ -285,7 +285,7 @@ public class ProcessorResource extends ApplicationResource {
     public Response createProcessor(
             @Context HttpServletRequest httpServletRequest,
             @ApiParam(
-                    value = "The processor configuration details",
+                    value = "The processor configuration details.",
                     required = true
             )
             ProcessorEntity processorEntity) {
@@ -760,17 +760,17 @@ public class ProcessorResource extends ApplicationResource {
     public Response deleteProcessor(
             @Context HttpServletRequest httpServletRequest,
             @ApiParam(
-                    value = "The revision is used to verify the client is working with the latest version of the flow",
+                    value = "The revision is used to verify the client is working with the latest version of the flow.",
                     required = false
             )
             @QueryParam(VERSION) LongParameter version,
             @ApiParam(
-                    value = "If the client id is not specified, new one will be generated. This value (whether specified or generated) is included in the response",
+                    value = "If the client id is not specified, new one will be generated. This value (whether specified or generated) is included in the response.",
                     required = false
             )
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @ApiParam(
-                    value = "The processor id",
+                    value = "The processor id.",
                     required = true
             )
             @PathParam("id") String id) {
