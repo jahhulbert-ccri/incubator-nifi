@@ -323,7 +323,7 @@ public class InputPortResource extends ApplicationResource {
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @TypeHint(InputPortEntity.class)
     @ApiOperation(
-            value = "Getrs an input port",
+            value = "Gets an input port",
             response = InputPortEntity.class,
             authorizations = {
                 @Authorization(value = "Read Only", type = "ROLE_MONITOR"),

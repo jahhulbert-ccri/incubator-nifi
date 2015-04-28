@@ -17,6 +17,11 @@
 package org.apache.nifi.web.api;
 
 import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
+import com.wordnik.swagger.annotations.Authorization;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -103,10 +108,34 @@ public class OutputPortResource extends ApplicationResource {
      * @return A outputPortsEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @TypeHint(OutputPortsEntity.class)
-    public Response getOutputPorts(@QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId) {
+    @ApiOperation(
+            value = "Gets all output ports",
+            response = OutputPortsEntity.class,
+            authorizations = {
+                @Authorization(value = "Read Only", type = "ROLE_MONITOR"),
+                @Authorization(value = "Data Flow Manager", type = "ROLE_DFM"),
+                @Authorization(value = "Administrator", type = "ROLE_ADMIN")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 400, message = "NiFi was unable to complete the request because it was invalid. The request should not be retried without modification."),
+                @ApiResponse(code = 401, message = "Client could not be authenticated."),
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request."),
+                @ApiResponse(code = 409, message = "The request was valid but NiFi was not in the appropriate state to process it. Retrying the same request later may be successful.")
+            }
+    )
+    public Response getOutputPorts(
+            @ApiParam(
+                    value = "If the client id is not specified, new one will be generated. This value (whether specified or generated) is included in the response.",
+                    required = false
+            )
+            @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId) {
 
         // replicate if cluster manager
         if (properties.isClusterManager()) {
@@ -143,6 +172,7 @@ public class OutputPortResource extends ApplicationResource {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(OutputPortEntity.class)
     public Response createOutputPort(
@@ -189,11 +219,30 @@ public class OutputPortResource extends ApplicationResource {
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(OutputPortEntity.class)
+    @ApiOperation(
+            value = "Creates an output port",
+            response = OutputPortEntity.class,
+            authorizations = {
+                @Authorization(value = "Data Flow Manager", type = "ROLE_DFM")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 400, message = "NiFi was unable to complete the request because it was invalid. The request should not be retried without modification."),
+                @ApiResponse(code = 401, message = "Client could not be authenticated."),
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request."),
+                @ApiResponse(code = 409, message = "The request was valid but NiFi was not in the appropriate state to process it. Retrying the same request later may be successful.")
+            }
+    )
     public Response createOutputPort(
             @Context HttpServletRequest httpServletRequest,
-            OutputPortEntity portEntity) {
+            @ApiParam(
+                    value = "The output port configuration.",
+                    required = true
+            ) OutputPortEntity portEntity) {
 
         if (portEntity == null || portEntity.getOutputPort() == null) {
             throw new IllegalArgumentException("Port details must be specified.");
@@ -268,11 +317,40 @@ public class OutputPortResource extends ApplicationResource {
      * @return A outputPortEntity.
      */
     @GET
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @TypeHint(OutputPortEntity.class)
-    public Response getOutputPort(@QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId, @PathParam("id") String id) {
+    @ApiOperation(
+            value = "Gets an output port",
+            response = OutputPortEntity.class,
+            authorizations = {
+                @Authorization(value = "Read Only", type = "ROLE_MONITOR"),
+                @Authorization(value = "Data Flow Manager", type = "ROLE_DFM"),
+                @Authorization(value = "Administrator", type = "ROLE_ADMIN")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 400, message = "NiFi was unable to complete the request because it was invalid. The request should not be retried without modification."),
+                @ApiResponse(code = 401, message = "Client could not be authenticated."),
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request."),
+                @ApiResponse(code = 404, message = "The specified resource could not be found."),
+                @ApiResponse(code = 409, message = "The request was valid but NiFi was not in the appropriate state to process it. Retrying the same request later may be successful.")
+            }
+    )
+    public Response getOutputPort(
+            @ApiParam(
+                    value = "If the client id is not specified, new one will be generated. This value (whether specified or generated) is included in the response.",
+                    required = false
+            )
+            @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
+            @ApiParam(
+                    value = "The output port id.",
+                    required = true
+            )
+            @PathParam("id") String id) {
 
         // replicate if cluster manager
         if (properties.isClusterManager()) {
@@ -390,10 +468,33 @@ public class OutputPortResource extends ApplicationResource {
     @Path("{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(OutputPortEntity.class)
+    @ApiOperation(
+            value = "Updates an output port",
+            response = OutputPortEntity.class,
+            authorizations = {
+                @Authorization(value = "Data Flow Manager", type = "ROLE_DFM")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 400, message = "NiFi was unable to complete the request because it was invalid. The request should not be retried without modification."),
+                @ApiResponse(code = 401, message = "Client could not be authenticated."),
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request."),
+                @ApiResponse(code = 404, message = "The specified resource could not be found."),
+                @ApiResponse(code = 409, message = "The request was valid but NiFi was not in the appropriate state to process it. Retrying the same request later may be successful.")
+            }
+    )
     public Response updateOutputPort(
             @Context HttpServletRequest httpServletRequest,
+            @ApiParam(
+                    value = "The output port id.",
+                    required = true
+            )
             @PathParam("id") String id,
-            OutputPortEntity portEntity) {
+            @ApiParam(
+                    value = "The output port configuration details.",
+                    required = true
+            ) OutputPortEntity portEntity) {
 
         if (portEntity == null || portEntity.getOutputPort() == null) {
             throw new IllegalArgumentException("Output port details must be specified.");
@@ -459,14 +560,43 @@ public class OutputPortResource extends ApplicationResource {
      * @return A outputPortEntity.
      */
     @DELETE
+    @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
     @TypeHint(OutputPortEntity.class)
+    @ApiOperation(
+            value = "Deletes an output port",
+            response = OutputPortEntity.class,
+            authorizations = {
+                @Authorization(value = "Data Flow Manager", type = "ROLE_DFM")
+            }
+    )
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 400, message = "NiFi was unable to complete the request because it was invalid. The request should not be retried without modification."),
+                @ApiResponse(code = 401, message = "Client could not be authenticated."),
+                @ApiResponse(code = 403, message = "Client is not authorized to make this request."),
+                @ApiResponse(code = 404, message = "The specified resource could not be found."),
+                @ApiResponse(code = 409, message = "The request was valid but NiFi was not in the appropriate state to process it. Retrying the same request later may be successful.")
+            }
+    )
     public Response removeOutputPort(
             @Context HttpServletRequest httpServletRequest,
+            @ApiParam(
+                    value = "The revision is used to verify the client is working with the latest version of the flow.",
+                    required = false
+            )
             @QueryParam(VERSION) LongParameter version,
+            @ApiParam(
+                    value = "If the client id is not specified, new one will be generated. This value (whether specified or generated) is included in the response.",
+                    required = false
+            )
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
+            @ApiParam(
+                    value = "The output port id.",
+                    required = true
+            )
             @PathParam("id") String id) {
 
         // replicate if cluster manager
