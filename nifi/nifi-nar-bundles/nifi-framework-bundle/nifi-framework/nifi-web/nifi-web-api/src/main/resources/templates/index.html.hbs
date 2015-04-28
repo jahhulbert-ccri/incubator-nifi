@@ -314,6 +314,11 @@
                     e.stopPropagation();
                 });
                 
+                // due to lack of support for @last when iterating objects 
+                // in handlebars we need to remove the last comma from each 
+                // example
+                $('code.example').find('span.comma:last').remove();
+                
                 // populate nested examples
                 $('code.example').on('click', 'span.nested', function(e) {
                     var nested = $(this).removeClass('collapsed');
