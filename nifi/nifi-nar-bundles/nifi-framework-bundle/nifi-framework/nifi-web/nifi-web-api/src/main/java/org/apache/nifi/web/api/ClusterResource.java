@@ -1183,6 +1183,7 @@ public class ClusterResource extends ApplicationResource {
     }
 
     // setters
+    
     public void setServiceFacade(NiFiServiceFacade serviceFacade) {
         this.serviceFacade = serviceFacade;
     }
