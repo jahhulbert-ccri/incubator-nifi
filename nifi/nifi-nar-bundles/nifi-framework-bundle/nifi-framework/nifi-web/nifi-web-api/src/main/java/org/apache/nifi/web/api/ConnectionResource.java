@@ -114,9 +114,7 @@ public class ConnectionResource extends ApplicationResource {
     /**
      * Gets all the connections.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @return A connectionsEntity.
      */
     @GET
@@ -173,9 +171,7 @@ public class ConnectionResource extends ApplicationResource {
     /**
      * Retrieves the specified connection.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the connection.
      * @return A connectionEntity.
      */
@@ -239,9 +235,7 @@ public class ConnectionResource extends ApplicationResource {
     /**
      * Retrieves the specified connection status history.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the connection to retrieve.
      * @return A statusHistoryEntity.
      */
@@ -306,11 +300,8 @@ public class ConnectionResource extends ApplicationResource {
      * Creates a connection.
      *
      * @param httpServletRequest request
-     * @param version The revision is used to verify the client is working with
-     * the latest version of the flow.
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param version The revision is used to verify the client is working with the latest version of the flow.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param name The name of the connection.
      * @param sourceId The id of the source connectable.
      * @param sourceGroupId The parent group id for the source.
@@ -318,15 +309,10 @@ public class ConnectionResource extends ApplicationResource {
      * @param bends Array of bend points in string form ["x,y", "x,y", "x,y"]
      * @param relationships Array of relationships.
      * @param flowFileExpiration The flow file expiration in minutes
-     * @param backPressureObjectThreshold The object count for when to apply
-     * back pressure.
-     * @param backPressureDataSizeThreshold The object size for when to apply
-     * back pressure.
-     * @param prioritizers Array of prioritizer types. These types should refer
-     * to one of the types in the GET /controller/prioritizers response. If this
-     * parameter is not specified no change will be made. If this parameter
-     * appears with no value (empty string), it will be treated as an empty
-     * array.
+     * @param backPressureObjectThreshold The object count for when to apply back pressure.
+     * @param backPressureDataSizeThreshold The object size for when to apply back pressure.
+     * @param prioritizers Array of prioritizer types. These types should refer to one of the types in the GET /controller/prioritizers response. If this parameter is not specified no change will be
+     * made. If this parameter appears with no value (empty string), it will be treated as an empty array.
      * @param destinationId The id of the destination connectable.
      * @param destinationGroupId The parent group id for the destination.
      * @param destinationType The type of the destination connectable.
@@ -573,11 +559,8 @@ public class ConnectionResource extends ApplicationResource {
      * Updates the specified relationship target.
      *
      * @param httpServletRequest request
-     * @param version The revision is used to verify the client is working with
-     * the latest version of the flow.
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param version The revision is used to verify the client is working with the latest version of the flow.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param connectionId The id of the source processor.
      * @param name The name of the connection.
      * @param relationships Array of relationships.
@@ -585,15 +568,10 @@ public class ConnectionResource extends ApplicationResource {
      * @param labelIndex The control point index for the connection label
      * @param zIndex The zIndex for this connection
      * @param flowFileExpiration The flow file expiration in minutes
-     * @param backPressureObjectThreshold The object count for when to apply
-     * back pressure.
-     * @param backPressureDataSizeThreshold The object size for when to apply
-     * back pressure.
-     * @param prioritizers Array of prioritizer types. These types should refer
-     * to one of the types in the GET /controller/prioritizers response. If this
-     * parameter is not specified no change will be made. If this parameter
-     * appears with no value (empty string), it will be treated as an empty
-     * array.
+     * @param backPressureObjectThreshold The object count for when to apply back pressure.
+     * @param backPressureDataSizeThreshold The object size for when to apply back pressure.
+     * @param prioritizers Array of prioritizer types. These types should refer to one of the types in the GET /controller/prioritizers response. If this parameter is not specified no change will be
+     * made. If this parameter appears with no value (empty string), it will be treated as an empty array.
      * @param destinationId The id of the destination connectable.
      * @param destinationGroupId The group id of the destination.
      * @param destinationType The type of the destination type.
@@ -828,11 +806,8 @@ public class ConnectionResource extends ApplicationResource {
      * Removes the specified connection.
      *
      * @param httpServletRequest request
-     * @param version The revision is used to verify the client is working with
-     * the latest version of the flow.
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param version The revision is used to verify the client is working with the latest version of the flow.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the connection.
      * @return An Entity containing the client id and an updated revision.
      */
@@ -911,7 +886,6 @@ public class ConnectionResource extends ApplicationResource {
     }
 
     // setters
-    
     public void setServiceFacade(NiFiServiceFacade serviceFacade) {
         this.serviceFacade = serviceFacade;
     }

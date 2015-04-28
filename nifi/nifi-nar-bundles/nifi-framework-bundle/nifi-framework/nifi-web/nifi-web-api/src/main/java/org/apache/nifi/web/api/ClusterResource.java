@@ -111,9 +111,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the status of this NiFi cluster.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @return A clusterStatusEntity
      */
     @GET
@@ -184,12 +182,9 @@ public class ClusterResource extends ApplicationResource {
     }
 
     /**
-     * Gets the contents of this NiFi cluster. This includes all nodes and their
-     * status.
+     * Gets the contents of this NiFi cluster. This includes all nodes and their status.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @return A clusterEntity
      */
     @GET
@@ -319,9 +314,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the processor.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the processor
      * @return A processorEntity
      */
@@ -385,11 +378,8 @@ public class ClusterResource extends ApplicationResource {
      * Updates the processors annotation data.
      *
      * @param httpServletRequest request
-     * @param version The revision is used to verify the client is working with
-     * the latest version of the flow.
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param version The revision is used to verify the client is working with the latest version of the flow.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param processorId The id of the processor.
      * @param annotationData The annotation data to set.
      * @return A processorEntity.
@@ -539,9 +529,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the processor status for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the processor
      * @return A clusterProcessorStatusEntity
      */
@@ -604,9 +592,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the processor status history for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the processor
      * @return A clusterProcessorStatusHistoryEntity
      */
@@ -668,9 +654,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the connection status for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the processor
      * @return A clusterProcessorStatusEntity
      */
@@ -733,9 +717,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the connections status history for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the processor
      * @return A clusterProcessorStatusHistoryEntity
      */
@@ -797,9 +779,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the process group status for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the process group
      * @return A clusterProcessGroupStatusEntity
      */
@@ -862,9 +842,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the process group status history for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the process group
      * @return A clusterProcessGroupStatusHistoryEntity
      */
@@ -926,9 +904,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the remote process group status for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the remote process group
      * @return A clusterRemoteProcessGroupStatusEntity
      */
@@ -991,9 +967,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the input port status for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the input port
      * @return A clusterPortStatusEntity
      */
@@ -1056,9 +1030,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the output port status for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the output port
      * @return A clusterPortStatusEntity
      */
@@ -1121,9 +1093,7 @@ public class ClusterResource extends ApplicationResource {
     /**
      * Gets the remote process group status history for every node.
      *
-     * @param clientId Optional client id. If the client id is not specified, a
-     * new one will be generated. This value (whether specified or generated) is
-     * included in the response.
+     * @param clientId Optional client id. If the client id is not specified, a new one will be generated. This value (whether specified or generated) is included in the response.
      * @param id The id of the processor
      * @return A clusterRemoteProcessGroupStatusHistoryEntity
      */
@@ -1183,7 +1153,6 @@ public class ClusterResource extends ApplicationResource {
     }
 
     // setters
-    
     public void setServiceFacade(NiFiServiceFacade serviceFacade) {
         this.serviceFacade = serviceFacade;
     }
