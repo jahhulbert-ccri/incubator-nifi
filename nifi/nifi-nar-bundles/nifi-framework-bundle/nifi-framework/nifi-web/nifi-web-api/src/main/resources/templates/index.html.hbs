@@ -314,9 +314,8 @@
                     e.stopPropagation();
                 });
                 
-                // due to lack of support for @last when iterating objects 
-                // in handlebars we need to remove the last comma from each 
-                // example
+                // due to lack of support for @last when iterating objects in 
+                // handlebars we need to remove the last comma from each example
                 $('code.example').find('span.comma:last').remove();
                 
                 // populate nested examples
@@ -328,7 +327,7 @@
                     // get the id of the nested example
                     var typeId = nestedId.text();
                     var example = $('#' + typeId + ' code.example').html();
-                    var depth = nestedId.parents('span.nested').length;
+                    var depth = nestedId.parents('span.open-object').length;
                     
                     // tab over as appropriate
                     example = example.replace(/(\r\n|\r|\n)/g, function(match) {
