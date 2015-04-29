@@ -41,4 +41,11 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.wordnik</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.3-M1</version>
+        </dependency>
+    </dependencies>
 </project>
