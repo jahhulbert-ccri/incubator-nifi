@@ -191,7 +191,7 @@ public class ControllerServiceResource extends ApplicationResource {
             )
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @ApiParam(
-                    value = "Whether the controller is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
+                    value = "Whether the controller service is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
                     allowableValues = "NCM, NODE",
                     required = true
             )
@@ -301,7 +301,7 @@ public class ControllerServiceResource extends ApplicationResource {
     public Response createControllerService(
             @Context HttpServletRequest httpServletRequest,
             @ApiParam(
-                    value = "Whether the controller is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
+                    value = "Whether the controller service is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
                     allowableValues = "NCM, NODE",
                     required = true
             )
@@ -424,7 +424,7 @@ public class ControllerServiceResource extends ApplicationResource {
             )
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @ApiParam(
-                    value = "Whether the controller is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
+                    value = "Whether the controller service is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
                     allowableValues = "NCM, NODE",
                     required = true
             )
@@ -499,7 +499,7 @@ public class ControllerServiceResource extends ApplicationResource {
             )
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @ApiParam(
-                    value = "Whether the controller is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
+                    value = "Whether the controller service is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
                     allowableValues = "NCM, NODE",
                     required = true
             )
@@ -586,7 +586,7 @@ public class ControllerServiceResource extends ApplicationResource {
             )
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @ApiParam(
-                    value = "Whether the controller is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
+                    value = "Whether the controller service is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
                     allowableValues = "NCM, NODE",
                     required = true
             )
@@ -673,7 +673,7 @@ public class ControllerServiceResource extends ApplicationResource {
             )
             @FormParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @ApiParam(
-                    value = "Whether the controller is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
+                    value = "Whether the controller service is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
                     allowableValues = "NCM, NODE",
                     required = true
             )
@@ -898,7 +898,7 @@ public class ControllerServiceResource extends ApplicationResource {
     public Response updateControllerService(
             @Context HttpServletRequest httpServletRequest,
             @ApiParam(
-                    value = "Whether the controller is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
+                    value = "Whether the controller service is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
                     allowableValues = "NCM, NODE",
                     required = true
             )
@@ -1018,7 +1018,7 @@ public class ControllerServiceResource extends ApplicationResource {
             )
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @ApiParam(
-                    value = "Whether the controller is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
+                    value = "Whether the controller service is available on the NCM or nodes. If the NiFi is standalone the availability should be NODE.",
                     allowableValues = "NCM, NODE",
                     required = true
             )

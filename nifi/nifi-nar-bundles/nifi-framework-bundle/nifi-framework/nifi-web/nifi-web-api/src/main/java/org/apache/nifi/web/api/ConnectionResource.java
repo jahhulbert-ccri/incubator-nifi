@@ -482,7 +482,8 @@ public class ConnectionResource extends ApplicationResource {
             @ApiParam(
                     value = "The connection configuration details.",
                     required = true
-            ) ConnectionEntity connectionEntity) {
+            )
+            ConnectionEntity connectionEntity) {
 
         if (connectionEntity == null || connectionEntity.getConnection() == null) {
             throw new IllegalArgumentException("Connection details must be specified.");
