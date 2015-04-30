@@ -176,7 +176,8 @@ public class UserGroupResource extends ApplicationResource {
             @ApiParam(
                     value = "The user group configuration details.",
                     required = true
-            ) UserGroupEntity userGroupEntity) {
+            )
+            UserGroupEntity userGroupEntity) {
 
         if (userGroupEntity == null || userGroupEntity.getUserGroup() == null) {
             throw new IllegalArgumentException("User group details must be specified.");

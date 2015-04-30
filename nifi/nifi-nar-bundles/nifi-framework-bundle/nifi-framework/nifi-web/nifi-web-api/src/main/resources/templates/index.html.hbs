@@ -192,7 +192,28 @@
                 padding: 10px;
                 background-color: #eee;
                 font-size: 12px;
+            }
+            
+            div.type-container {
                 overflow-y: scroll;
+                height: 415px;
+                border-bottom: 1px solid #ccc;
+            }
+            
+            div.close {
+                border: 1px solid #aaa;
+                background-color: #ddd;
+                float: right;
+                margin-top: 10px;
+                font-weight: bold;
+                height: 25px;
+                line-height: 25px;
+                padding: 0 10px;
+                cursor: pointer;
+            }
+            
+            div.close:hover {
+                background-color: #c8c8c8;
             }
             
             /* tables */
@@ -281,6 +302,10 @@
                 // hide any open type dialogs
                 $('html').on('click', function() {
                     $('div.type').hide();
+                }).on('keydown', function(e) {
+                    if (e.which === 27) {
+                        $('div.type').hide();
+                    }
                 });
                 
                 // populate all paths - this is necessary because the @key
@@ -294,7 +319,7 @@
                 
                 // toggles the visibility of a given operation
                 $('div.operation-handle').on('click', function () {
-                    $(this).next('div.operation').toggle();
+                    $(this).next('div.operation').slideToggle();
                 });
                 
                 // add support for clicking to view the definition of a type
@@ -341,6 +366,11 @@
                     // copy over the example
                     nestedExample.html(example);
                     e.stopPropagation();
+                });
+                
+                // handle close button
+                $('div.close').on('click', function() {
+                    $(this).closest('div.type').hide();
                 });
             });
         </script>

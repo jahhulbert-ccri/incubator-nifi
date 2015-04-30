@@ -14,38 +14,42 @@
 --}}
 <div id="{{@key}}" class="type hidden">
     <h3>{{@key}}</h3>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th>Description</th>
-        </tr>
-        {{#each properties}}
+    <div class="type-container">
+        <table>
             <tr>
-                <td>{{@key}}</td>
-                <td>
-                    {{#ifeq type "array"}}
-                        {{#items.$ref}}
-                            {{type}}[<a class="type-link" href="javascript:void(0);">{{basename items.$ref}}</a>]
-                        {{/items.$ref}}
-                        {{^items.$ref}}
-                            {{type}}[{{items.type}}]
-                        {{/items.$ref}}
-                    {{else}}
-                        {{#$ref}}
-                            <a class="type-link" href="javascript:void(0);">{{basename $ref}}</a>
-                        {{/$ref}}
-                        {{^$ref}}
-                            {{type}}{{#format}} ({{format}}){{/format}}
-                        {{/$ref}}
-                    {{/ifeq}}
-                </td>
-                <td>{{#required}}required{{/required}}{{^required}}optional{{/required}}</td>
-                <td>{{#description}}{{{description}}}{{/description}}</td>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
             </tr>
-        {{/each}}
-    </table>
-    <h4>Example</h4>
-    <code class="example"><span class="open-object">&#123;{{> example}}&#125;</span></code>
+            {{#each properties}}
+                <tr>
+                    <td>{{@key}}</td>
+                    <td>
+                        {{#ifeq type "array"}}
+                            {{#items.$ref}}
+                                {{type}}[<a class="type-link" href="javascript:void(0);">{{basename items.$ref}}</a>]
+                            {{/items.$ref}}
+                            {{^items.$ref}}
+                                {{type}}[{{items.type}}]
+                            {{/items.$ref}}
+                        {{else}}
+                            {{#$ref}}
+                                <a class="type-link" href="javascript:void(0);">{{basename $ref}}</a>
+                            {{/$ref}}
+                            {{^$ref}}
+                                {{type}}{{#format}} ({{format}}){{/format}}
+                            {{/$ref}}
+                        {{/ifeq}}
+                    </td>
+                    <td>{{#required}}required{{/required}}{{^required}}optional{{/required}}</td>
+                    <td>{{#description}}{{{description}}}{{/description}}</td>
+                </tr>
+            {{/each}}
+        </table>
+        <h4>Example JSON</h4>
+        <code class="example"><span class="open-object">&#123;{{> example}}&#125;</span></code>
+    </div>
+    <div class="close">Close</div>
+    <div class="clear"></div>
 </div>
