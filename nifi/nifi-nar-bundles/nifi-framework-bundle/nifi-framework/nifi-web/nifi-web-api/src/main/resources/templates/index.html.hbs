@@ -238,6 +238,10 @@
                 background-color: #d1d1d1;
             }
             
+            div.section > div.title {
+                font-size: 24px;
+            }
+            
             div.section-endpoints {
                 margin-top: 10px;
             }
@@ -413,19 +417,19 @@
                 
                 // organize the endpoints
                 organizeEndpoints('cluster', $('#cluster-endpoints'));
-                organizeEndpoints('history', $('#history-endpoints'));
                 organizeEndpoints('provenance', $('#provenance-endpoints'));
                 organizeEndpoints('user', $('#user-endpoints'));
-                organizeEndpoints('controller-service', $('#controller-service-endpoints'));
-                organizeEndpoints('reporting-task', $('#reporting-task-endpoints'));
+                organizeEndpoints('controller-services', $('#controller-service-endpoints'));
+                organizeEndpoints('reporting-tasks', $('#reporting-task-endpoints'));
                 organizeEndpoints('connections', $('#connection-endpoints'));
                 organizeEndpoints('processors', $('#processor-endpoints'));
                 organizeEndpoints('funnels', $('#funnel-endpoints'));
+                organizeEndpoints('remote-process-groups', $('#remote-process-group-endpoints'));
                 organizeEndpoints('input-ports', $('#input-port-endpoints'));
                 organizeEndpoints('output-ports', $('#output-port-endpoints'));
-                organizeEndpoints('remote-process-groups', $('#remote-process-group-endpoints'));
                 organizeEndpoints('labels', $('#label-endpoints'));
                 organizeEndpoints('process-groups', $('#process-group-endpoints'));
+                organizeEndpoints('history', $('#history-endpoints'));
                 organizeEndpoints(null, $('#controller-endpoints'));
                 
                 
@@ -446,36 +450,20 @@
         <div class="clear"></div>
         <div class="overview">{{info.description}}</div>
         <div class="section">
-            <div class="title link">Cluster</div>
-            <div id="cluster-endpoints" class="section-endpoints hidden"></div>
+            <div class="title link">Controller</div>
+            <div id="controller-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">History</div>
-            <div id="history-endpoints" class="section-endpoints hidden"></div>
+            <div class="title link">Process Groups</div>
+            <div id="process-group-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Provenance</div>
-            <div id="provenance-endpoints" class="section-endpoints hidden"></div>
-        </div>
-        <div class="section">
-            <div class="title link">Users</div>
-            <div id="user-endpoints" class="section-endpoints hidden"></div>
-        </div>
-        <div class="section">
-            <div class="title link">Controller Services</div>
-            <div id="controller-service-endpoints" class="section-endpoints hidden"></div>
+            <div class="title link">Processors</div>
+            <div id="processor-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
             <div class="title link">Connections</div>
             <div id="connection-endpoints" class="section-endpoints hidden"></div>
-        </div>
-        <div class="section">
-            <div class="title link">Processors</div>
-            <div id="reporting-task-endpoints" class="section-endpoints hidden"></div>
-        </div>
-        <div class="section">
-            <div class="title link">Funnels</div>
-            <div id="funnel-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
             <div class="title link">Input Ports</div>
@@ -494,14 +482,34 @@
             <div id="label-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Process Groups</div>
-            <div id="process-group-endpoints" class="section-endpoints hidden"></div>
+            <div class="title link">Funnels</div>
+            <div id="funnel-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Controller</div>
-            <div id="controller-endpoints" class="section-endpoints hidden"></div>
+            <div class="title link">Controller Services</div>
+            <div id="controller-service-endpoints" class="section-endpoints hidden"></div>
         </div>
-        <div class="unorganized">
+        <div class="section">
+            <div class="title link">Reporting Tasks</div>
+            <div id="reporting-task-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Cluster</div>
+            <div id="cluster-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Provenance</div>
+            <div id="provenance-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">History</div>
+            <div id="history-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Users</div>
+            <div id="user-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="unorganized hidden">
             {{#each paths}}
                 {{> endpoint}}
             {{/each}}
