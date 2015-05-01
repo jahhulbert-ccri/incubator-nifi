@@ -43,7 +43,7 @@
                         {{/ifeq}}
                     </td>
                     <td>{{#required}}required{{/required}}{{^required}}optional{{/required}}</td>
-                    <td>{{#description}}{{{description}}}{{/description}}</td>
+                    <td>{{#description}}{{{description}}}{{/description}}{{#if enum}} Allowable values: {{join enum ", "}}{{/if}}</td>
                 </tr>
             {{/each}}
         </table>

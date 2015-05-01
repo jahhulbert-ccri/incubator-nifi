@@ -318,7 +318,7 @@ public class NodeResource extends ApplicationResource {
             )
             @PathParam("id") String id,
             @ApiParam(
-                    value = "The node configuration.",
+                    value = "The node configuration. The only configuration that will be honored at this endpoint is the status or primary flag.",
                     required = true
             )
             NodeEntity nodeEntity) {

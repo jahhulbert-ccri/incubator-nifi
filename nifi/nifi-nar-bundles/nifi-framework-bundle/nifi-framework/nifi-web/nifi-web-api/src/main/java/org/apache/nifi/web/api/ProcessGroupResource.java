@@ -643,7 +643,8 @@ public class ProcessGroupResource extends ApplicationResource {
     public Response updateProcessGroup(
             @Context HttpServletRequest httpServletRequest,
             @ApiParam(
-                    value = "The process group configuration details.",
+                    value = "The process group to update. The only action that is supported at this endpoint is to set the running flag in order "
+                            + "to start or stop all descendent schedulable components. This defines the schema of the expected input.",
                     required = true
             )
             ProcessGroupEntity processGroupEntity) {
