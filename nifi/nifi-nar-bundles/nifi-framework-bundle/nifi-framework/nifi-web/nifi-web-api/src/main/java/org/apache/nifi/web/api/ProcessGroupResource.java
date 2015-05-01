@@ -68,7 +68,6 @@ import org.apache.nifi.web.api.request.ClientIdParameter;
 import org.apache.nifi.web.api.request.DoubleParameter;
 import org.apache.nifi.web.api.request.LongParameter;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
@@ -281,7 +280,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ProcessGroupEntity.class)
     @ApiOperation(
             value = "Gets a process group",
             response = ProcessGroupEntity.class,
@@ -363,7 +361,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/snippet-instance")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(FlowSnippetEntity.class)
     @ApiOperation(
             value = "Copies a snippet",
             response = FlowSnippetEntity.class,
@@ -475,7 +472,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/template-instance")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(FlowSnippetEntity.class)
     @ApiOperation(
             value = "Instantiates a template",
             response = FlowSnippetEntity.class,
@@ -582,7 +578,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessGroupEntity.class)
     public Response updateProcessGroup(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -623,7 +618,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessGroupEntity.class)
     @ApiOperation(
             value = "Updates a process group",
             response = ProcessGroupEntity.class,
@@ -716,7 +710,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ProcessGroupEntity.class)
     @ApiOperation(
             value = "Gets a process group",
             response = ProcessGroupEntity.class,
@@ -799,7 +792,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ProcessGroupsEntity.class)
     @ApiOperation(
             value = "Gets all process groups",
             response = ProcessGroupsEntity.class,
@@ -873,7 +865,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessGroupEntity.class)
     public Response createProcessGroupReference(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -919,7 +910,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessGroupEntity.class)
     @ApiOperation(
             value = "Creates a process group",
             response = ProcessGroupEntity.class,
@@ -1027,7 +1017,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessGroupEntity.class)
     public Response updateProcessGroupReference(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -1081,7 +1070,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessGroupEntity.class)
     @ApiOperation(
             value = "Updates a process group",
             response = ProcessGroupEntity.class,
@@ -1177,7 +1165,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/process-group-references/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessGroupEntity.class)
     @ApiOperation(
             value = "Deletes a process group",
             response = ProcessGroupEntity.class,
@@ -1258,7 +1245,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN', 'ROLE_NIFI')")
-    @TypeHint(ProcessGroupStatusEntity.class)
     @ApiOperation(
             value = "Gets the status for a process group",
             response = ProcessGroupStatusEntity.class,
@@ -1321,7 +1307,6 @@ public class ProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(StatusHistoryEntity.class)
     @ApiOperation(
             value = "Gets status history for a remote process group",
             response = StatusHistoryEntity.class,

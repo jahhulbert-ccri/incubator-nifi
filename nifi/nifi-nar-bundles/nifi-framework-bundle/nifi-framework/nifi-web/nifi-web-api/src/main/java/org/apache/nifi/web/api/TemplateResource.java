@@ -59,7 +59,6 @@ import org.apache.nifi.web.api.entity.TemplateEntity;
 import org.apache.nifi.web.api.entity.TemplatesEntity;
 import org.apache.nifi.web.api.request.ClientIdParameter;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -111,7 +110,6 @@ public class TemplateResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(TemplatesEntity.class)
     @ApiOperation(
             value = "Gets all templates",
             response = TemplatesEntity.class,
@@ -175,7 +173,6 @@ public class TemplateResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(TemplateEntity.class)
     @ApiOperation(
             value = "Creates a template",
             response = TemplateEntity.class,
@@ -258,7 +255,6 @@ public class TemplateResource extends ApplicationResource {
     @Produces(MediaType.APPLICATION_XML)
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(TemplateEntity.class)
     public Response importTemplate(
             @Context HttpServletRequest httpServletRequest,
             @FormDataParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
@@ -321,7 +317,6 @@ public class TemplateResource extends ApplicationResource {
     @Produces(MediaType.APPLICATION_XML)
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(TemplateEntity.class)
     public Response importTemplate(
             @Context HttpServletRequest httpServletRequest,
             TemplateEntity templateEntity) {
@@ -383,7 +378,6 @@ public class TemplateResource extends ApplicationResource {
     @Produces(MediaType.APPLICATION_XML)
     @Path("{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(TemplateDTO.class)
     @ApiOperation(
             value = "Exports a template",
             response = TemplateDTO.class,
@@ -452,7 +446,6 @@ public class TemplateResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(TemplateEntity.class)
     @ApiOperation(
             value = "Deletes a template",
             response = TemplateEntity.class,

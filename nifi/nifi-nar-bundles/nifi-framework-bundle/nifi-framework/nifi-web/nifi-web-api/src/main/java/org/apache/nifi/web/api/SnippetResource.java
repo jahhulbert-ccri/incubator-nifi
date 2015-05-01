@@ -60,7 +60,6 @@ import org.apache.nifi.web.api.request.ClientIdParameter;
 import org.apache.nifi.web.api.request.LongParameter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.nifi.web.api.entity.PropertyDescriptorEntity;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -225,7 +224,6 @@ public class SnippetResource extends ApplicationResource {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(SnippetEntity.class)
     public Response createSnippet(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -283,7 +281,6 @@ public class SnippetResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(SnippetEntity.class)
     @ApiOperation(
             value = "Gets a reporting task property descriptor",
             response = PropertyDescriptorEntity.class,
@@ -398,7 +395,6 @@ public class SnippetResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(SnippetEntity.class)
     @ApiOperation(
             value = "Gets a snippet",
             response = SnippetEntity.class,
@@ -483,7 +479,6 @@ public class SnippetResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(SnippetEntity.class)
     public Response updateSnippet(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -530,7 +525,6 @@ public class SnippetResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(SnippetEntity.class)
     @ApiOperation(
             value = "Updates a snippet",
             response = SnippetEntity.class,
@@ -633,7 +627,6 @@ public class SnippetResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(SnippetEntity.class)
     @ApiOperation(
             value = "Deletes a snippet",
             response = SnippetEntity.class,

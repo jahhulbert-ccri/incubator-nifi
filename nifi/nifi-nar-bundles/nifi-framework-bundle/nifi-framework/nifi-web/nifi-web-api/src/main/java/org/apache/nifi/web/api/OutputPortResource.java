@@ -61,7 +61,6 @@ import org.apache.nifi.web.api.request.DoubleParameter;
 import org.apache.nifi.web.api.request.IntegerParameter;
 import org.apache.nifi.web.api.request.LongParameter;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -112,7 +111,6 @@ public class OutputPortResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(OutputPortsEntity.class)
     @ApiOperation(
             value = "Gets all output ports",
             response = OutputPortsEntity.class,
@@ -175,7 +173,6 @@ public class OutputPortResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(OutputPortEntity.class)
     public Response createOutputPort(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -222,7 +219,6 @@ public class OutputPortResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(OutputPortEntity.class)
     @ApiOperation(
             value = "Creates an output port",
             response = OutputPortEntity.class,
@@ -323,7 +319,6 @@ public class OutputPortResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(OutputPortEntity.class)
     @ApiOperation(
             value = "Gets an output port",
             response = OutputPortEntity.class,
@@ -397,7 +392,6 @@ public class OutputPortResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(OutputPortEntity.class)
     public Response updateOutputPort(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -469,7 +463,6 @@ public class OutputPortResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(OutputPortEntity.class)
     @ApiOperation(
             value = "Updates an output port",
             response = OutputPortEntity.class,
@@ -566,7 +559,6 @@ public class OutputPortResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(OutputPortEntity.class)
     @ApiOperation(
             value = "Deletes an output port",
             response = OutputPortEntity.class,

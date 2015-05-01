@@ -62,7 +62,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.nifi.web.NiFiServiceFacade;
 import static org.apache.nifi.web.api.ApplicationResource.CLIENT_ID;
 import org.apache.nifi.web.api.dto.RevisionDTO;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
@@ -98,7 +97,6 @@ public class UserResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to a bug in swagger
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @TypeHint(UsersEntity.class)
     @ApiOperation(
             value = "Gets all users",
             response = UsersEntity.class,
@@ -157,7 +155,6 @@ public class UserResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Path("/{id}")
-    @TypeHint(UserEntity.class)
     @ApiOperation(
             value = "Gets a user",
             response = UserEntity.class,
@@ -213,7 +210,6 @@ public class UserResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/search-results")
     @PreAuthorize("hasAnyRole('ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(UserSearchResultsEntity.class)
     @ApiOperation(
             value = "Searches for users",
             response = UserSearchResultsEntity.class,
@@ -334,7 +330,6 @@ public class UserResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Path("/{id}")
-    @TypeHint(UserEntity.class)
     public Response updateUser(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
@@ -387,7 +382,6 @@ public class UserResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Path("/{id}")
-    @TypeHint(UserEntity.class)
     @ApiOperation(
             value = "Updates a user",
             response = UserEntity.class,
@@ -507,7 +501,6 @@ public class UserResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @TypeHint(UserEntity.class)
     @ApiOperation(
             value = "Deletes a user",
             response = UserEntity.class,

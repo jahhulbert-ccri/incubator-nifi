@@ -45,7 +45,6 @@ import org.apache.nifi.web.api.dto.action.ActionDTO;
 import org.apache.nifi.web.api.dto.action.HistoryDTO;
 import org.apache.nifi.web.api.dto.action.HistoryQueryDTO;
 import org.apache.nifi.web.api.entity.ComponentHistoryEntity;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
@@ -89,7 +88,6 @@ public class HistoryResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(HistoryEntity.class)
     @ApiOperation(
             value = "Gets configuration history",
             response = HistoryEntity.class,
@@ -239,7 +237,6 @@ public class HistoryResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @Path("{id}")
-    @TypeHint(ActionEntity.class)
     @ApiOperation(
             value = "Gets an action",
             response = ActionEntity.class,
@@ -305,7 +302,6 @@ public class HistoryResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @TypeHint(HistoryEntity.class)
     @ApiOperation(
             value = "Purges history",
             response = HistoryEntity.class,
@@ -367,7 +363,6 @@ public class HistoryResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/processors/{processorId}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ComponentHistoryEntity.class)
     @ApiOperation(
             value = "Gets configuration history for a processor",
             response = ComponentHistoryEntity.class,
@@ -425,7 +420,6 @@ public class HistoryResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/controller-services/{controllerServiceId}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ComponentHistoryEntity.class)
     @ApiOperation(
             value = "Gets configuration history for a controller service",
             response = ComponentHistoryEntity.class,
@@ -483,7 +477,6 @@ public class HistoryResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/reporting-tasks/{reportingTaskId}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ComponentHistoryEntity.class)
     @ApiOperation(
             value = "Gets configuration history for a reporting task",
             response = ComponentHistoryEntity.class,

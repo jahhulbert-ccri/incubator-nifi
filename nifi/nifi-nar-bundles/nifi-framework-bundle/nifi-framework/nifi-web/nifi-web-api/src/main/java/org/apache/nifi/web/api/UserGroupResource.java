@@ -50,7 +50,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.nifi.web.NiFiServiceFacade;
 import org.apache.nifi.web.api.dto.RevisionDTO;
 import org.apache.nifi.web.api.dto.UserGroupDTO;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
@@ -94,7 +93,6 @@ public class UserGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{group}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @TypeHint(UserGroupEntity.class)
     public Response updateUserGroup(
             @Context HttpServletRequest httpServletRequest,
             @PathParam("group") String group,
@@ -149,7 +147,6 @@ public class UserGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{group}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @TypeHint(UserGroupEntity.class)
     @ApiOperation(
             value = "Updates a user group",
             response = UserGroupEntity.class,
@@ -280,7 +277,6 @@ public class UserGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{group}/users/{userId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @TypeHint(UserGroupEntity.class)
     @ApiOperation(
             value = "Removes a user from a user group",
             notes = "Removes a user from a user group. The will not be deleted, jsut the fact that they were in this group.",
@@ -378,7 +374,6 @@ public class UserGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{group}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @TypeHint(UserGroupEntity.class)
     @ApiOperation(
             value = "Deletes a user group",
             notes = "Deletes a user group. The users will not be removed, just the fact that they were grouped.",

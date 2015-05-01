@@ -46,7 +46,6 @@ import org.apache.nifi.web.api.dto.RevisionDTO;
 import org.apache.nifi.web.api.dto.status.NodeStatusDTO;
 import org.apache.nifi.web.api.entity.ProcessGroupStatusEntity;
 import org.apache.nifi.web.api.entity.SystemDiagnosticsEntity;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
@@ -70,7 +69,6 @@ public class NodeResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(NodeEntity.class)
     @ApiOperation(
             value = "Gets a node in the cluster",
             response = NodeEntity.class,
@@ -135,7 +133,6 @@ public class NodeResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ProcessGroupStatusEntity.class)
     @ApiOperation(
             value = "Gets process group status for a node in the cluster",
             response = ProcessGroupStatusEntity.class,
@@ -198,7 +195,6 @@ public class NodeResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/system-diagnostics")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(SystemDiagnosticsEntity.class)
     @ApiOperation(
             value = "Gets system diagnostics for a node in the cluester",
             response = SystemDiagnosticsEntity.class,
@@ -263,7 +259,6 @@ public class NodeResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @TypeHint(NodeEntity.class)
     public Response updateNode(@QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @PathParam("id") String id,
             @FormParam("status") String status,
@@ -300,7 +295,6 @@ public class NodeResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @TypeHint(NodeEntity.class)
     @ApiOperation(
             value = "Updates a node in the cluster",
             response = NodeEntity.class,
@@ -377,7 +371,6 @@ public class NodeResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @TypeHint(NodeEntity.class)
     @ApiOperation(
             value = "Removes a node from the cluster",
             response = NodeEntity.class,

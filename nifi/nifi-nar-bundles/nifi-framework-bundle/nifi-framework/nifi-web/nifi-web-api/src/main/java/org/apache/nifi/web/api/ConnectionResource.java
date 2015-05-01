@@ -71,7 +71,6 @@ import org.apache.nifi.web.api.request.IntegerParameter;
 import org.apache.nifi.web.api.request.LongParameter;
 
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -122,7 +121,6 @@ public class ConnectionResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ConnectionsEntity.class)
     @ApiOperation(
             value = "Gets all connections",
             response = ConnectionsEntity.class,
@@ -181,7 +179,6 @@ public class ConnectionResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ConnectionEntity.class)
     @ApiOperation(
             value = "Gets a connection",
             response = ConnectionEntity.class,
@@ -245,7 +242,6 @@ public class ConnectionResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(StatusHistoryEntity.class)
     @ApiOperation(
             value = "Gets the status history for a connection",
             response = StatusHistoryEntity.class,
@@ -325,7 +321,6 @@ public class ConnectionResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ConnectionEntity.class)
     public Response createConnection(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -460,7 +455,6 @@ public class ConnectionResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ConnectionEntity.class)
     @ApiOperation(
             value = "Creates a connection",
             response = ConnectionEntity.class,
@@ -585,7 +579,6 @@ public class ConnectionResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ConnectionEntity.class)
     public Response updateConnection(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -723,7 +716,6 @@ public class ConnectionResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ConnectionEntity.class)
     @ApiOperation(
             value = "Updates a connection",
             response = ConnectionEntity.class,
@@ -818,7 +810,6 @@ public class ConnectionResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ConnectionEntity.class)
     @ApiOperation(
             value = "Deletes a connection",
             response = ConnectionEntity.class,

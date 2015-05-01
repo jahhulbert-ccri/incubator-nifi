@@ -81,7 +81,6 @@ import org.apache.nifi.ui.extension.UiExtensionMapping;
 import org.apache.nifi.web.UiExtensionType;
 import org.apache.nifi.web.api.dto.PropertyDescriptorDTO;
 import org.apache.nifi.web.api.entity.PropertyDescriptorEntity;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -159,7 +158,6 @@ public class ProcessorResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ProcessorsEntity.class)
     @ApiOperation(
             value = "Gets all processors",
             response = ProcessorsEntity.class,
@@ -218,7 +216,6 @@ public class ProcessorResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessorEntity.class)
     public Response createProcessor(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -266,7 +263,6 @@ public class ProcessorResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessorEntity.class)
     @ApiOperation(
             value = "Creates a new processor",
             response = ProcessorEntity.class,
@@ -373,7 +369,6 @@ public class ProcessorResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ProcessorEntity.class)
     @ApiOperation(
             value = "Gets a processor",
             response = ProcessorEntity.class,
@@ -437,7 +432,6 @@ public class ProcessorResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(StatusHistoryEntity.class)
     @ApiOperation(
             value = "Gets status history for a processor",
             response = StatusHistoryEntity.class,
@@ -502,7 +496,6 @@ public class ProcessorResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/descriptors")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(PropertyDescriptorEntity.class)
     @ApiOperation(
             value = "Gets the descriptor for a processor property",
             response = PropertyDescriptorEntity.class,
@@ -605,7 +598,6 @@ public class ProcessorResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessorEntity.class)
     public Response updateProcessor(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -731,7 +723,6 @@ public class ProcessorResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessorEntity.class)
     @ApiOperation(
             value = "Updates a processor",
             response = ProcessorEntity.class,
@@ -838,7 +829,6 @@ public class ProcessorResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessorEntity.class)
     @ApiOperation(
             value = "Deletes a processor",
             response = ProcessorEntity.class,

@@ -68,7 +68,6 @@ import org.apache.nifi.web.api.request.IntegerParameter;
 import org.apache.nifi.web.api.request.LongParameter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.nifi.web.api.entity.ConnectionsEntity;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -126,7 +125,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(RemoteProcessGroupsEntity.class)
     @ApiOperation(
             value = "Gets all remote process groups",
             response = ConnectionsEntity.class,
@@ -198,7 +196,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(RemoteProcessGroupEntity.class)
     @ApiOperation(
             value = "Gets a remote process group",
             response = RemoteProcessGroupEntity.class,
@@ -271,7 +268,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(StatusHistoryEntity.class)
     @ApiOperation(
             value = "Gets the status history",
             response = StatusHistoryEntity.class,
@@ -339,7 +335,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(RemoteProcessGroupEntity.class)
     public Response createRemoteProcessGroup(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -386,7 +381,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(RemoteProcessGroupEntity.class)
     @ApiOperation(
             value = "Creates a new process group",
             response = RemoteProcessGroupEntity.class,
@@ -523,7 +517,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(RemoteProcessGroupEntity.class)
     @ApiOperation(
             value = "Deletes a remote process group",
             response = RemoteProcessGroupEntity.class,
@@ -610,7 +603,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/input-ports/{port-id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(RemoteProcessGroupPortEntity.class)
     public Response updateRemoteProcessGroupInputPort(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -662,7 +654,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/input-ports/{port-id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(RemoteProcessGroupPortEntity.class)
     @ApiOperation(
             value = "Updates a remote port",
             response = RemoteProcessGroupPortEntity.class,
@@ -756,7 +747,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/output-ports/{port-id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(RemoteProcessGroupPortEntity.class)
     public Response updateRemoteProcessGroupOutputPort(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -808,7 +798,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}/output-ports/{port-id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(RemoteProcessGroupPortEntity.class)
     @ApiOperation(
             value = "Updates a remote port",
             response = RemoteProcessGroupPortEntity.class,
@@ -903,7 +892,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(RemoteProcessGroupEntity.class)
     public Response updateRemoteProcessGroup(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -957,7 +945,6 @@ public class RemoteProcessGroupResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(RemoteProcessGroupEntity.class)
     @ApiOperation(
             value = "Updates a remote process group",
             response = RemoteProcessGroupEntity.class,

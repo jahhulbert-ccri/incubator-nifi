@@ -72,7 +72,6 @@ import org.apache.nifi.web.api.entity.ControllerServiceReferencingComponentsEnti
 import org.apache.nifi.web.api.entity.ControllerServicesEntity;
 import org.apache.nifi.web.api.entity.PropertyDescriptorEntity;
 import org.apache.nifi.web.util.Availability;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -166,7 +165,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ControllerServicesEntity.class)
     @ApiOperation(
             value = "Gets all controller services",
             response = ControllerServicesEntity.class,
@@ -240,7 +238,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ControllerServiceEntity.class)
     public Response createControllerService(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -282,7 +279,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ControllerServiceEntity.class)
     @ApiOperation(
             value = "Creates a new controller service",
             response = ControllerServiceEntity.class,
@@ -398,7 +394,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ControllerServiceEntity.class)
     @ApiOperation(
             value = "Gets a controller service",
             response = ControllerServiceEntity.class,
@@ -473,7 +468,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}/{id}/descriptors")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(PropertyDescriptorEntity.class)
     @ApiOperation(
             value = "Gets a controller service property descriptor",
             response = PropertyDescriptorEntity.class,
@@ -560,7 +554,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}/{id}/references")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ControllerServiceEntity.class)
     @ApiOperation(
             value = "Gets a controller service",
             response = ControllerServiceEntity.class,
@@ -643,7 +636,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}/{id}/references")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ControllerServiceEntity.class)
     @ApiOperation(
             value = "Updates a controller services references",
             response = ControllerServiceEntity.class,
@@ -799,7 +791,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ControllerServiceEntity.class)
     public Response updateControllerService(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -878,7 +869,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ControllerServiceEntity.class)
     @ApiOperation(
             value = "Updates a controller service",
             response = ControllerServiceEntity.class,
@@ -988,7 +978,6 @@ public class ControllerServiceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{availability}/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ControllerServiceEntity.class)
     @ApiOperation(
             value = "Deletes a controller service",
             response = ControllerServiceEntity.class,

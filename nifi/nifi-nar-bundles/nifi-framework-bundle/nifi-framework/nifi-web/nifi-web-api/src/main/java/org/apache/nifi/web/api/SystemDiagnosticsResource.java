@@ -38,7 +38,6 @@ import org.apache.nifi.web.api.entity.SystemDiagnosticsEntity;
 import org.apache.nifi.web.api.request.ClientIdParameter;
 
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -70,7 +69,6 @@ public class SystemDiagnosticsResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // due to a bug in swagger
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(SystemDiagnosticsEntity.class)
     @ApiOperation(
             value = "Gets the diagnostics for the system NiFi is running on",
             response = SystemDiagnosticsEntity.class,

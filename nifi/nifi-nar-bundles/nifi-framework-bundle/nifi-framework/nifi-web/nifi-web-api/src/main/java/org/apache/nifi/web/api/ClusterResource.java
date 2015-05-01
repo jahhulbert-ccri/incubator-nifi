@@ -77,7 +77,6 @@ import com.wordnik.swagger.annotations.ApiResponses;
 import com.wordnik.swagger.annotations.Authorization;
 import org.apache.nifi.web.api.dto.status.ClusterProcessGroupStatusDTO;
 import org.apache.nifi.web.api.entity.ClusterProcessGroupStatusEntity;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 
 /**
  * RESTful endpoint for managing a cluster.
@@ -119,7 +118,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterStatusEntity.class)
     @ApiOperation(
             value = "Gets the status of the cluster",
             response = ClusterStatusEntity.class,
@@ -191,7 +189,6 @@ public class ClusterResource extends ApplicationResource {
     @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterEntity.class)
     @ApiOperation(
             value = "Gets the contents of the cluster",
             notes = "Returns the contents of the cluster including all nodes and their status.",
@@ -248,7 +245,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/search-results")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterSearchResultsEntity.class)
     @ApiOperation(
             value = "Searches the cluster for a node with the specified address",
             response = ClusterSearchResultsEntity.class,
@@ -323,7 +319,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/processors/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ProcessorEntity.class)
     @ApiOperation(
             value = "Gets the specified processor",
             response = ProcessorEntity.class,
@@ -389,7 +384,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/processors/{id}")
     @PreAuthorize("hasAnyRole('ROLE_DFM')")
-    @TypeHint(ProcessorEntity.class)
     public Response updateProcessor(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -440,7 +434,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/processors/{id}")
     @PreAuthorize("hasAnyRole('ROLE_DFM')")
-    @TypeHint(ProcessorEntity.class)
     @ApiOperation(
             value = "Updates processor annotation data",
             response = ProcessorEntity.class,
@@ -538,7 +531,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/processors/{id}/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterProcessorStatusEntity.class)
     @ApiOperation(
             value = "Gets the processor status across the cluster",
             response = ClusterProcessorStatusEntity.class,
@@ -601,7 +593,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/processors/{id}/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterStatusHistoryEntity.class)
     @ApiOperation(
             value = "Gets processor status history across the cluster",
             response = ClusterStatusHistoryEntity.class,
@@ -663,7 +654,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/connections/{id}/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterConnectionStatusEntity.class)
     @ApiOperation(
             value = "Gets connection status across the cluster",
             response = ClusterConnectionStatusEntity.class,
@@ -726,7 +716,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/connections/{id}/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterStatusHistoryEntity.class)
     @ApiOperation(
             value = "Gets connection status history across the cluster",
             response = ClusterStatusHistoryEntity.class,
@@ -788,7 +777,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/process-groups/{id}/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterProcessGroupStatusEntity.class)
     @ApiOperation(
             value = "Gets process group status across the cluster",
             response = ClusterProcessGroupStatusEntity.class,
@@ -851,7 +839,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/process-groups/{id}/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterStatusHistoryEntity.class)
     @ApiOperation(
             value = "Gets process group status history across the cluster",
             response = ClusterStatusHistoryEntity.class,
@@ -913,7 +900,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/remote-process-groups/{id}/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterRemoteProcessGroupStatusEntity.class)
     @ApiOperation(
             value = "Gets remote process group status across the cluster",
             response = ClusterRemoteProcessGroupStatusEntity.class,
@@ -976,7 +962,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/input-ports/{id}/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterPortStatusEntity.class)
     @ApiOperation(
             value = "Gets input port status across the cluster",
             response = ClusterPortStatusEntity.class,
@@ -1039,7 +1024,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/output-ports/{id}/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterPortStatusEntity.class)
     @ApiOperation(
             value = "Gets output port status across the cluster",
             response = ClusterPortStatusEntity.class,
@@ -1102,7 +1086,6 @@ public class ClusterResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/remote-process-groups/{id}/status/history")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ClusterStatusHistoryEntity.class)
     @ApiOperation(
             value = "Gets the remote process group status history across the cluster",
             response = ClusterStatusHistoryEntity.class,

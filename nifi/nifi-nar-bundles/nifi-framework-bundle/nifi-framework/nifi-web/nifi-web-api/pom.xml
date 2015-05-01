@@ -23,56 +23,6 @@
     <groupId>org.apache.nifi</groupId>
     <artifactId>nifi-web-api</artifactId>
     <packaging>war</packaging>
-    <profiles>
-        <profile>
-            <id>docs</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/enunciate/images</directory>
-                        <targetPath>${project.build.directory}/${project.artifactId}-${project.version}/docs/rest-api/img</targetPath>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.enunciate</groupId>
-                        <artifactId>maven-enunciate-plugin</artifactId>
-                        <version>1.28</version>
-                        <configuration>
-                            <configFile>src/main/enunciate/enunciate.xml</configFile>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>docs</goal>
-                                </goals>
-                                <configuration>
-                                    <docsDir>${project.build.directory}/${project.artifactId}-${project.version}/docs/rest-api</docsDir>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <!--
-                            Enunciate currently uses APT to process class annotations. APT 
-                            has been deprecated in Java 7. As a result, a direct dependency
-                            must be added to tools.jar where APT is located.
-                        -->
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.sun</groupId>
-                                <artifactId>tools</artifactId>
-                                <version>1.7.0</version>
-                                <scope>system</scope>
-                                <systemPath>${java.home}/../lib/tools.jar</systemPath>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
     <build>
         <resources>
             <resource>
@@ -151,11 +101,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.enunciate</groupId>
-            <artifactId>enunciate-core-annotations</artifactId>
-            <version>1.28</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-data-provenance-utils</artifactId>
             <scope>provided</scope>
@@ -231,7 +176,7 @@
         <dependency>
             <groupId>com.wordnik</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>1.5.3-M1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.quartz-scheduler</groupId>

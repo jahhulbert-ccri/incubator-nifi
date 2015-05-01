@@ -80,7 +80,6 @@ import org.apache.nifi.web.api.request.LongParameter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.nifi.web.api.entity.ControllerServiceTypesEntity;
 import org.apache.nifi.web.api.entity.ReportingTaskTypesEntity;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
@@ -273,7 +272,6 @@ public class ControllerResource extends ApplicationResource {
     @Consumes(MediaType.WILDCARD)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @PreAuthorize("hasRole('ROLE_NIFI')")
-    @TypeHint(ControllerEntity.class)
     @ApiOperation(
             value = "Returns the details about this NiFi necessary to communicate via site to site",
             response = ControllerEntity.class,
@@ -325,7 +323,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/search-results")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(SearchResultsEntity.class)
     @ApiOperation(
             value = "Performs a search against this NiFi using the specified search term",
             response = SearchResultsEntity.class,
@@ -376,7 +373,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/archive")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ProcessGroupEntity.class)
     @ApiOperation(
             value = "Creates a new archive of this NiFi flow configuration",
             notes = "This POST operation returns a URI that is not representative of the thing "
@@ -454,7 +450,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/revision")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(Entity.class)
     @ApiOperation(
             value = "Gets the current revision of this NiFi",
             response = Entity.class,
@@ -495,7 +490,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/status")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ControllerStatusEntity.class)
     @ApiOperation(
             value = "Gets the current status of this NiFi",
             response = Entity.class,
@@ -546,7 +540,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/counters")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(CountersEntity.class)
     @ApiOperation(
             value = "Gets the current counters for this NiFi",
             response = Entity.class,
@@ -599,7 +592,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/counters/{id}")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(CounterEntity.class)
     @ApiOperation(
             value = "Updates the specified counter. This will reset the counter value to 0",
             response = CounterEntity.class,
@@ -663,7 +655,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/config")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN', 'ROLE_NIFI')")
-    @TypeHint(ControllerConfigurationEntity.class)
     @ApiOperation(
             value = "Retrieves the configuration for this NiFi",
             response = ControllerConfigurationEntity.class,
@@ -727,7 +718,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/config")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ControllerConfigurationEntity.class)
     public Response updateControllerConfig(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(VERSION) LongParameter version,
@@ -779,7 +769,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/config")
     @PreAuthorize("hasRole('ROLE_DFM')")
-    @TypeHint(ControllerConfigurationEntity.class)
     @ApiOperation(
             value = "Retrieves the configuration for this NiFi",
             response = ControllerConfigurationEntity.class,
@@ -857,7 +846,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/authorities")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(AuthorityEntity.class)
     @ApiOperation(
             value = "Retrieves the user details, including the authorities, about the user making the request",
             response = AuthorityEntity.class,
@@ -913,7 +901,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/banners")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(BannerEntity.class)
     @ApiOperation(
             value = "Retrieves the banners for this NiFi",
             response = BannerEntity.class,
@@ -974,7 +961,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/processor-types")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ProcessorTypesEntity.class)
     @ApiOperation(
             value = "Retrieves the types of processors that this NiFi supports",
             response = ProcessorTypesEntity.class,
@@ -1029,7 +1015,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/controller-service-types")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ControllerServiceTypesEntity.class)
     @ApiOperation(
             value = "Retrieves the types of controller services that this NiFi supports",
             response = ControllerServiceTypesEntity.class,
@@ -1088,7 +1073,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/reporting-task-types")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(ReportingTaskTypesEntity.class)
     @ApiOperation(
             value = "Retrieves the types of reporting tasks that this NiFi supports",
             response = ReportingTaskTypesEntity.class,
@@ -1142,7 +1126,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/prioritizers")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(PrioritizerTypesEntity.class)
     @ApiOperation(
             value = "Retrieves the types of prioritizers that this NiFi supports",
             response = PrioritizerTypesEntity.class,
@@ -1196,7 +1179,6 @@ public class ControllerResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/about")
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
-    @TypeHint(AboutEntity.class)
     @ApiOperation(
             value = "Retrieves details about this NiFi to put in the About dialog",
             response = AboutEntity.class,

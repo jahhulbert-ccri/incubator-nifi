@@ -83,7 +83,6 @@ import org.apache.nifi.web.api.request.LongParameter;
 import org.apache.nifi.web.DownloadableContent;
 
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -128,7 +127,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/search-options")
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(ProvenanceOptionsEntity.class)
     @ApiOperation(
             value = "Gets the searchable attributes for provenance events",
             response = ProvenanceOptionsEntity.class,
@@ -186,7 +184,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/replays")
     @PreAuthorize("hasRole('ROLE_PROVENANCE') and hasRole('ROLE_DFM')")
-    @TypeHint(ProvenanceEventEntity.class)
     @ApiOperation(
             value = "Replays content from a provenance event",
             response = ProvenanceEventEntity.class,
@@ -492,7 +489,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(ProvenanceEntity.class)
     public Response submitProvenanceRequest(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
@@ -574,7 +570,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("") // necessary due to bug in swagger
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(ProvenanceEntity.class)
     @ApiOperation(
             value = "Submits a provenance query",
             response = ProvenanceEntity.class,
@@ -687,7 +682,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(ProvenanceEntity.class)
     @ApiOperation(
             value = "Gets a provenance query",
             response = ProvenanceEntity.class,
@@ -774,7 +768,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/{id}")
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(ProvenanceEntity.class)
     @ApiOperation(
             value = "Deletes a provenance query",
             response = ProvenanceEntity.class,
@@ -864,7 +857,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/events/{id}")
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(ProvenanceEventEntity.class)
     @ApiOperation(
             value = "Gets a provenance event",
             response = ProvenanceEventEntity.class,
@@ -964,7 +956,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/lineage")
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(LineageEntity.class)
     public Response submitLineageRequest(
             @Context HttpServletRequest httpServletRequest,
             @FormParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
@@ -1026,7 +1017,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/lineage")
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(LineageEntity.class)
     @ApiOperation(
             value = "Submits a lineage query",
             response = LineageEntity.class,
@@ -1145,7 +1135,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/lineage/{id}")
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(LineageEntity.class)
     @ApiOperation(
             value = "Gets a lineage query",
             response = LineageEntity.class,
@@ -1230,7 +1219,6 @@ public class ProvenanceResource extends ApplicationResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/lineage/{id}")
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
-    @TypeHint(LineageEntity.class)
     @ApiOperation(
             value = "Deletes a lineage query",
             response = LineageEntity.class,
