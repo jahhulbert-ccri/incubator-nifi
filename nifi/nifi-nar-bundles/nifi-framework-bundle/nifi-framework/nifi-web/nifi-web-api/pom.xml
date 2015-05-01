@@ -56,10 +56,10 @@
                                     <schemes>http,https</schemes>
                                     <basePath>/nifi-api</basePath>
                                     <info>
-                                        <title>NiFi Rest Api</title>
+                                        <title>NiFi REST API</title>
                                         <version>${project.version}</version>
                                         <description>
-                                            The Rest Api provides programmatic access to command and control a NiFi instance in real time. Start and 
+                                            The REST API provides programmatic access to command and control a NiFi instance in real time. Start and 
                                             stop processors, monitor queues, query provenance data, and more. Each endpoint below includes a description,
                                             definitions of the expected input and output, potential response codes, and the authorities required
                                             to invoke each service.

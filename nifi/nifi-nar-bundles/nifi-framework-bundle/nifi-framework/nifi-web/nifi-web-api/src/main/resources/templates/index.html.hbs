@@ -58,12 +58,13 @@
                 line-height: 50px;
             }
             
-            div.sub-title {
+            .sub-title {
                 font-style: italic;
                 color: #aaa;
             }
             
             div.overview {
+                margin-top: 10px;
                 margin-bottom: 15px;
             }
             
@@ -242,8 +243,14 @@
                 background-color: #d1d1d1;
             }
             
-            div.section > div.title {
+            div.section-header > div.title {
                 font-size: 24px;
+                float: left;
+            }
+            
+            div.section-description {
+                float: right;
+                margin-top: 10px;
             }
             
             div.section-endpoints {
@@ -438,8 +445,8 @@
                 
                 
                 // handle expanding/collapsing the sections
-                $('div.section > div.title').on('click', function() {
-                    $(this).next('div.section-endpoints').slideToggle();
+                $('div.section-header > div.title').on('click', function() {
+                    $(this).parent('div.section-header').next('div.section-endpoints').slideToggle();
                 });
             });
         </script>
@@ -454,63 +461,123 @@
         <div class="clear"></div>
         <div class="overview">{{info.description}}</div>
         <div class="section">
-            <div class="title link">Controller</div>
+            <div class="section-header">
+                <div class="title link">Controller</div>
+                <div class="sub-title section-description">Get controller configuration, Search the flow, Manage templates, System diagnostics</div>
+                <div class="clear"></div>
+            </div>
             <div id="controller-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Process Groups</div>
+            <div class="section-header">
+                <div class="title link">Process Groups</div>
+                <div class="sub-title section-description">Get the flow, Instantiate a template, Manage sub groups</div>
+                <div class="clear"></div>
+            </div>
             <div id="process-group-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Processors</div>
+            <div class="section-header">
+                <div class="title link">Processors</div>
+                <div class="sub-title section-description">Create a processor, Set properties, Schedule</div>
+                <div class="clear"></div>
+            </div>
             <div id="processor-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Connections</div>
+            <div class="section-header">
+                <div class="title link">Connections</div>
+                <div class="sub-title section-description">Create a connection, Set queue prioritizer, Update connection destination</div>
+                <div class="clear"></div>
+            </div>
             <div id="connection-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Input Ports</div>
+            <div class="section-header">
+                <div class="title link">Input Ports</div>
+                <div class="sub-title section-description">Create an input port, Set remote port access control</div>
+                <div class="clear"></div>
+            </div>
             <div id="input-port-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Output Ports</div>
+            <div class="section-header">
+                <div class="title link">Output Ports</div>
+                <div class="sub-title section-description">Create an output port, Set remote port access control</div>
+                <div class="clear"></div>
+            </div>
             <div id="output-port-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Remote Process Groups</div>
+            <div class="section-header">
+                <div class="title link">Remote Process Groups</div>
+                <div class="sub-title section-description">Create a remote group, Enable transmission</div>
+                <div class="clear"></div>
+            </div>
             <div id="remote-process-group-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Labels</div>
+            <div class="section-header">
+                <div class="title link">Labels</div>
+                <div class="sub-title section-description">Create a label, Set label style</div>
+                <div class="clear"></div>
+            </div>
             <div id="label-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Funnels</div>
+            <div class="section-header">
+                <div class="title link">Funnels</div>
+                <div class="sub-title section-description">Manage funnels</div>
+                <div class="clear"></div>
+            </div>
             <div id="funnel-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Controller Services</div>
+            <div class="section-header">
+                <div class="title link">Controller Services</div>
+                <div class="sub-title section-description">Manage controller services, Update controller service references</div>
+                <div class="clear"></div>
+            </div>
             <div id="controller-service-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Reporting Tasks</div>
+            <div class="section-header">
+                <div class="title link">Reporting Tasks</div>
+                <div class="sub-title section-description">Manage reporting tasks</div>
+                <div class="clear"></div>
+            </div>
             <div id="reporting-task-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Cluster</div>
+            <div class="section-header">
+                <div class="title link">Cluster</div>
+                <div class="sub-title section-description">View node status, Disconnect nodes, Aggregate component status</div>
+                <div class="clear"></div>
+            </div>
             <div id="cluster-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Provenance</div>
+            <div class="section-header">
+                <div class="title link">Provenance</div>
+                <div class="sub-title section-description">Query provenance, Search event lineage, Download content, Replay</div>
+                <div class="clear"></div>
+            </div>
             <div id="provenance-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">History</div>
+            <div class="section-header">
+                <div class="title link">History</div>
+                <div class="sub-title section-description">View flow history, Purge flow history</div>
+                <div class="clear"></div>
+            </div>
             <div id="history-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="section">
-            <div class="title link">Users</div>
+            <div class="section-header">
+                <div class="title link">Users</div>
+                <div class="sub-title section-description">Update user access, revoke accounts, get account details, Group users</div>
+                <div class="clear"></div>
+            </div>
             <div id="user-endpoints" class="section-endpoints hidden"></div>
         </div>
         <div class="unorganized hidden">
