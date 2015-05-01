@@ -238,7 +238,8 @@ public class ControllerResource extends ApplicationResource {
     )
     public ProcessGroupResource getGroupResource(
             @ApiParam(
-                    value = "The id of the process group that is the parent of the requested resource(s).",
+                    value = "The id of the process group that is the parent of the requested resource(s). If the desired process group is "
+                            + "the root group an alias 'root' may be used as the process-group-id.",
                     required = true
             )
             @PathParam("process-group-id") String groupId) {

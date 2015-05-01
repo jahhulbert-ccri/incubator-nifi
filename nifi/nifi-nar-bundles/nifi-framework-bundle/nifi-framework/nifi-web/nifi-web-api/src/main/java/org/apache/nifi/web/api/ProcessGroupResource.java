@@ -1252,6 +1252,8 @@ public class ProcessGroupResource extends ApplicationResource {
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN', 'ROLE_NIFI')")
     @ApiOperation(
             value = "Gets the status for a process group",
+            notes = "The status for a process group includes status for all descendent components. When invoked on the root group with "
+                    + "recursive set to true, it will return the current status of every component in the flow.",
             response = ProcessGroupStatusEntity.class,
             authorizations = {
                 @Authorization(value = "Read Only", type = "ROLE_MONITOR"),
