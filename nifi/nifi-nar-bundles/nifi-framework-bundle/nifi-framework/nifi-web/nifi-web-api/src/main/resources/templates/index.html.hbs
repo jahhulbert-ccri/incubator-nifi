@@ -16,6 +16,8 @@
 <html>
     <head>
         <title>{{info.title}}-{{info.version}}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="shortcut icon" href="images/nifi16.ico"/>
         <script type="text/javascript" src="../nifi/js/jquery/jquery-2.1.1.min.js"></script>
         <script type="text/javascript">
             if (typeof window.jQuery === 'undefined') {
@@ -37,8 +39,28 @@
                 font-family: "Open Sans", "DejaVu Sans", sans-serif;
             }
             
+            div.header {
+                margin-top: 10px;
+            }
+            
+            img.logo {
+                float: left;
+                margin-right: 10px;
+            }
+            
+            div.header > div.title {
+                font-size: 30px;
+                height: 50px;
+                line-height: 50px;
+            }
+            
+            div.sub-title {
+                font-style: italic;
+                color: #aaa;
+            }
+            
             div.overview {
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
             
             div.endpoint {
@@ -213,7 +235,11 @@
             }
             
             div.close:hover {
-                background-color: #c8c8c8;
+                background-color: #d1d1d1;
+            }
+            
+            div.section-endpoints {
+                margin-top: 10px;
             }
             
             /* tables */
@@ -286,13 +312,13 @@
                 display: none;
             }
             
-            a {
+            a, .link {
                 cursor: pointer;
                 color: #1e373f;
                 font-weight: normal;
             }
             
-            a:hover {
+            a:hover, .link:hover {
                 color: #264c58;
                 text-decoration: underline;
             }
@@ -372,16 +398,114 @@
                 $('div.close').on('click', function() {
                     $(this).closest('div.type').hide();
                 });
+                
+                // function for organizing the endpoints
+                var organizeEndpoints = function(term, container) {
+                    $('div.unorganized > div.endpoints').each(function() {
+                        var endpoints = $(this);
+                        var path = endpoints.find('div.path').text();
+                        
+                        if (term === null || path.indexOf(term) > 0) {
+                            endpoints.detach().appendTo(container);
+                        }
+                    });
+                };
+                
+                // organize the endpoints
+                organizeEndpoints('cluster', $('#cluster-endpoints'));
+                organizeEndpoints('history', $('#history-endpoints'));
+                organizeEndpoints('provenance', $('#provenance-endpoints'));
+                organizeEndpoints('user', $('#user-endpoints'));
+                organizeEndpoints('controller-service', $('#controller-service-endpoints'));
+                organizeEndpoints('reporting-task', $('#reporting-task-endpoints'));
+                organizeEndpoints('connections', $('#connection-endpoints'));
+                organizeEndpoints('processors', $('#processor-endpoints'));
+                organizeEndpoints('funnels', $('#funnel-endpoints'));
+                organizeEndpoints('input-ports', $('#input-port-endpoints'));
+                organizeEndpoints('output-ports', $('#output-port-endpoints'));
+                organizeEndpoints('remote-process-groups', $('#remote-process-group-endpoints'));
+                organizeEndpoints('labels', $('#label-endpoints'));
+                organizeEndpoints('process-groups', $('#process-group-endpoints'));
+                organizeEndpoints(null, $('#controller-endpoints'));
+                
+                
+                // handle expanding/collapsing the sections
+                $('div.section > div.title').on('click', function() {
+                    $(this).next('div.section-endpoints').slideToggle();
+                });
             });
         </script>
     </head>
     <body>
-        <div class="overview">
-            <div class="title">{{info.title}}-{{info.version}}</div>
+        <div class="header">
+            <img class="logo" src="images/bgNifiLogo.png" alt="NiFi Logo"/>
+            <div class="title">{{basePath}}</div>
+            <div class="sub-title">{{info.title}} {{info.version}}</div>
+            <div class="clear"></div>
         </div>
-        {{#each paths}}
-            {{> endpoint}}
-        {{/each}}
+        <div class="clear"></div>
+        <div class="overview">{{info.description}}</div>
+        <div class="section">
+            <div class="title link">Cluster</div>
+            <div id="cluster-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">History</div>
+            <div id="history-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Provenance</div>
+            <div id="provenance-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Users</div>
+            <div id="user-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Controller Services</div>
+            <div id="controller-service-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Connections</div>
+            <div id="connection-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Processors</div>
+            <div id="reporting-task-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Funnels</div>
+            <div id="funnel-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Input Ports</div>
+            <div id="input-port-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Output Ports</div>
+            <div id="output-port-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Remote Process Groups</div>
+            <div id="remote-process-group-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Labels</div>
+            <div id="label-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Process Groups</div>
+            <div id="process-group-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="section">
+            <div class="title link">Controller</div>
+            <div id="controller-endpoints" class="section-endpoints hidden"></div>
+        </div>
+        <div class="unorganized">
+            {{#each paths}}
+                {{> endpoint}}
+            {{/each}}
+        </div>
         {{#each definitions}}
             {{> type}}
         {{/each}}
