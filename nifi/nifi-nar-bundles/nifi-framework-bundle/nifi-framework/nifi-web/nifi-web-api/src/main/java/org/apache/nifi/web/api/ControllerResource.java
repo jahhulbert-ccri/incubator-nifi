@@ -452,6 +452,14 @@ public class ControllerResource extends ApplicationResource {
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @ApiOperation(
             value = "Gets the current revision of this NiFi",
+            notes = "NiFi employs an optimistic locking strategy where the client must include a revision in their request when "
+                    + "performing an update. If the specified revision does not match the current base revision a 409 status code "
+                    + "is returned. The revision is comprised of a clientId and a version number. The version is a simple integer "
+                    + "value that is incremented with each change. Including the most recent version tells NiFi that your working "
+                    + "with the most recent flow. In addition to the version the client who is performing the updates is recorded. "
+                    + "This allows the same client to submit multiple requests without having to wait for the previously ones to "
+                    + "return. Invoking this endpoint will return the current base revision. It is also available when retrieving "
+                    + "a process group and in the response of all mutable requests.",
             response = Entity.class,
             authorizations = {
                 @Authorization(value = "Read Only", type = "ROLE_MONITOR"),

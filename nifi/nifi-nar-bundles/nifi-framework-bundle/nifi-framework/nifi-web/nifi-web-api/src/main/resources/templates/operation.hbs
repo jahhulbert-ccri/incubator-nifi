@@ -30,7 +30,6 @@
             <tr>
                 <th>Name</th>
                 <th>Location</th>
-                <th>Required</th>
                 <th>Type</th>
                 <th>Description</th>
             </tr>
@@ -41,13 +40,6 @@
         <tr>
             <td>{{#ifeq in "body"}}{{else}}{{name}}{{/ifeq}}</td>
             <td>{{in}}</td>
-            <td>
-                {{#ifeq in "body"}}
-                    yes
-                {{else}}
-                    {{#if required}}yes{{else}}no{{/if}}
-                {{/ifeq}}
-            </td>
             {{#ifeq in "body"}}
                 <td>
                 {{#ifeq schema.type "array"}}Array[<a class="type-link" href="javascript:void(0);">{{basename schema.items.$ref}}</a>]{{/ifeq}}

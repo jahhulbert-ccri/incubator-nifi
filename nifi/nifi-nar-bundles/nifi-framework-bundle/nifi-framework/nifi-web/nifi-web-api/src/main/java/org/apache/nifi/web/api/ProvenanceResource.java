@@ -572,6 +572,10 @@ public class ProvenanceResource extends ApplicationResource {
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
     @ApiOperation(
             value = "Submits a provenance query",
+            notes = "Provenance queries may be long running so this endpoint submits a request. The response will include the "
+                    + "current state of the query. If the request is not completed the URI in the response can be used at a "
+                    + "later time to get the updated state of the query. Once the query has completed the provenance request "
+                    + "should be deleted by the client who originally submitted it.",
             response = ProvenanceEntity.class,
             authorizations = {
                 @Authorization(value = "Provenance", type = "ROLE_PROVENANCE")
@@ -1019,6 +1023,10 @@ public class ProvenanceResource extends ApplicationResource {
     @PreAuthorize("hasRole('ROLE_PROVENANCE')")
     @ApiOperation(
             value = "Submits a lineage query",
+            notes = "Lineage queries may be long running so this endpoint submits a request. The response will include the "
+                    + "current state of the query. If the request is not completed the URI in the response can be used at a "
+                    + "later time to get the updated state of the query. Once the query has completed the lineage request "
+                    + "should be deleted by the client who originally submitted it.",
             response = LineageEntity.class,
             authorizations = {
                 @Authorization(value = "Provenance", type = "ROLE_PROVENANCE")

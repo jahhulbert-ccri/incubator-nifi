@@ -282,6 +282,9 @@ public class ProcessGroupResource extends ApplicationResource {
     @PreAuthorize("hasAnyRole('ROLE_MONITOR', 'ROLE_DFM', 'ROLE_ADMIN')")
     @ApiOperation(
             value = "Gets a process group",
+            notes = "Gets a process group and includes all components contained in this group. The verbose and recursive flags can be used to adjust "
+                    + "the default behavior. This endpoint is starting point for obtaining the current flow and consequently includes the current "
+                    + "flow revision.",
             response = ProcessGroupEntity.class,
             authorizations = {
                 @Authorization(value = "Read Only", type = "ROLE_MONITOR"),
@@ -306,7 +309,8 @@ public class ProcessGroupResource extends ApplicationResource {
             @QueryParam(CLIENT_ID) @DefaultValue(StringUtils.EMPTY) ClientIdParameter clientId,
             @ApiParam(
                     value = "Whether the response should contain all encapsulated components or just the immediate children.",
-                    required = false
+                    required = false,
+                    allowableValues = "true, false"
             )
             @QueryParam("recursive") @DefaultValue(RECURSIVE) Boolean recursive,
             @ApiParam(
