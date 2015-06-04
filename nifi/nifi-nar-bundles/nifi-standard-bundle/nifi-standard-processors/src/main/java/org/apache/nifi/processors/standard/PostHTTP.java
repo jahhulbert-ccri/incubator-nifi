@@ -49,10 +49,7 @@ import javax.net.ssl.SSLSession;
 import javax.security.cert.X509Certificate;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.Header;
-import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpResponseInterceptor;
+import org.apache.http.*;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
@@ -91,6 +88,7 @@ import org.apache.nifi.components.ValidationContext;
 import org.apache.nifi.components.ValidationResult;
 import org.apache.nifi.flowfile.FlowFile;
 import org.apache.nifi.flowfile.attributes.CoreAttributes;
+import org.apache.nifi.http.HttpProxyService;
 import org.apache.nifi.logging.ProcessorLog;
 import org.apache.nifi.processor.AbstractProcessor;
 import org.apache.nifi.processor.DataUnit;
@@ -233,6 +231,13 @@ public class PostHTTP extends AbstractProcessor {
             .identifiesControllerService(SSLContextService.class)
             .build();
 
+    public static final PropertyDescriptor HTTP_PROXY_SERVICE = new PropertyDescriptor.Builder()
+            .name("Http Proxy Service")
+            .description("The Http Proxy Service to use in order to obtain an Http(s) Proxy")
+            .required(false)
+            .identifiesControllerService(HttpProxyService.class)
+            .build();
+
     public static final Relationship REL_SUCCESS = new Relationship.Builder()
             .name("success")
             .description("Files that are successfully send will be transferred to success")
@@ -261,6 +266,7 @@ public class PostHTTP extends AbstractProcessor {
         properties.add(MAX_BATCH_SIZE);
         properties.add(MAX_DATA_RATE);
         properties.add(SSL_CONTEXT_SERVICE);
+        properties.add(HTTP_PROXY_SERVICE);
         properties.add(USERNAME);
         properties.add(PASSWORD);
         properties.add(SEND_AS_FLOWFILE);
@@ -479,6 +485,15 @@ public class PostHTTP extends AbstractProcessor {
                     }
                     clientBuilder.setDefaultCredentialsProvider(credentialsProvider);
                 }
+
+                // Set proxy host and port if provided by config
+                final HttpProxyService httpProxyService = context.getProperty(HTTP_PROXY_SERVICE).asControllerService(HttpProxyService.class);
+                if (httpProxyService != null) {
+                    final String proxyHost = httpProxyService.getProxyHost();
+                    final int proxyPort = httpProxyService.getProxyPort();
+                    clientBuilder.setProxy(new HttpHost(proxyHost, proxyPort));
+                }
+
                 client = clientBuilder.build();
 
                 // determine whether or not destination accepts flowfile/gzip
