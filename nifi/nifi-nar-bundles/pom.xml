@@ -63,6 +63,12 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.nifi</groupId>
+                <artifactId>nifi-http-proxy-service-api</artifactId>
+                <version>0.2.0-incubating-SNAPSHOT</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.nifi</groupId>
                 <artifactId>nifi-load-distribution-service-api</artifactId>
                 <version>0.2.0-incubating-SNAPSHOT</version>
                 <scope>provided</scope>
