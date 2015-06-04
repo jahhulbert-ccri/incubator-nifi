@@ -15,23 +15,22 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>org.apache.nifi</groupId>
         <artifactId>nifi-http-proxy-service-bundle</artifactId>
         <version>0.2.0-incubating-SNAPSHOT</version>
     </parent>
-
-    <artifactId>nifi-http-proxy-service-bundle-nar</artifactId>
-    <version>0.2.0-incubating-SNAPSHOT</version>
+    <artifactId>nifi-http-proxy-service-nar</artifactId>
     <packaging>nar</packaging>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.nifi</groupId>
+            <artifactId>nifi-standard-services-api-nar</artifactId>
+            <type>nar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-http-proxy-service</artifactId>
-            <version>0.2.0-incubating-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
 </project>
