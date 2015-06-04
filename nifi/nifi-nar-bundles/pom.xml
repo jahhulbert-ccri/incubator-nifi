@@ -96,6 +96,11 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.nifi</groupId>
+                <artifactId>nifi-http-proxy-service</artifactId>
+                <version>0.2.0-incubating-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.nifi</groupId>
                 <artifactId>nifi-http-context-map</artifactId>
                 <version>0.2.0-incubating-SNAPSHOT</version>
             </dependency>
