@@ -50,6 +50,7 @@ import java.util.regex.Pattern;
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.Header;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -76,6 +77,7 @@ import org.apache.nifi.components.ValidationContext;
 import org.apache.nifi.components.ValidationResult;
 import org.apache.nifi.flowfile.FlowFile;
 import org.apache.nifi.flowfile.attributes.CoreAttributes;
+import org.apache.nifi.http.HttpProxyService;
 import org.apache.nifi.logging.ProcessorLog;
 import org.apache.nifi.processor.AbstractSessionFactoryProcessor;
 import org.apache.nifi.processor.ProcessContext;
@@ -166,6 +168,12 @@ public class GetHTTP extends AbstractSessionFactoryProcessor {
             .description("The Controller Service to use in order to obtain an SSL Context")
             .required(false)
             .identifiesControllerService(SSLContextService.class)
+            .build();
+    public static final PropertyDescriptor HTTP_PROXY_SERVICE = new PropertyDescriptor.Builder()
+            .name("Http Proxy Service")
+            .description("The Controller Service to use in order to configure an HTTP Proxy")
+            .required(false)
+            .identifiesControllerService(HttpProxyService.class)
             .build();
 
     public static final Relationship REL_SUCCESS = new Relationship.Builder()
@@ -372,6 +380,14 @@ public class GetHTTP extends AbstractSessionFactoryProcessor {
                     credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, password));
                 }
                 clientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+            }
+
+            // Set proxy host and port if provided by config
+            final HttpProxyService httpProxyService = context.getProperty(HTTP_PROXY_SERVICE).asControllerService(HttpProxyService.class);
+            if (httpProxyService != null) {
+                final String proxyHost = httpProxyService.getProxyHost();
+                final int proxyPort = httpProxyService.getProxyPort();
+                clientBuilder.setProxy(new HttpHost(proxyHost, proxyPort));
             }
 
             // create the http client
