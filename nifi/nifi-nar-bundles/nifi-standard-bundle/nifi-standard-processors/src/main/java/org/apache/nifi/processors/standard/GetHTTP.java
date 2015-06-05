@@ -226,6 +226,7 @@ public class GetHTTP extends AbstractSessionFactoryProcessor {
         properties.add(USER_AGENT);
         properties.add(ACCEPT_CONTENT_TYPE);
         properties.add(FOLLOW_REDIRECTS);
+        properties.add(HTTP_PROXY_SERVICE);
         this.properties = Collections.unmodifiableList(properties);
 
         // load etag and lastModified from file
